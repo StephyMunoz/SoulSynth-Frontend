@@ -9,7 +9,7 @@ const fetcher = (url) =>
         .get(url, {
             headers: {
                 Authorization:
-                    "Bearer ",
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9zb3Vsc3ludGgyLWg5cG84Lm9uZGlnaXRhbG9jZWFuLmFwcFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyOTc2MjYyNiwiZXhwIjoxNjI5NzY2MjI2LCJuYmYiOjE2Mjk3NjI2MjYsImp0aSI6Ildvb1FuUG8zNVZGQWxUMXoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.AkCDQjkJjQVkmwag0uAIqf7Qei8nWuDUP8NsE1KlR8o",
             },
         })
         .then((res) => res.data);
@@ -20,27 +20,27 @@ const SongDetailPage = () => {
     const {data, error} = useSWR("/songs/" + id, fetcher);
 
     if (error) {
-        return "Ocurrió un error " + error;
+        return "An error has occurred " + error;
     }
 
     if (!data) {
-        return "Cargando datos...";
+        return "Loading data...";
     }
     return (
         <div className={styles.songInfo}>
             <Image src={data.image} width={300} height={200}/>
-            <p><strong>Título:</strong> {data.name}</p>
-            <p><strong>Artista:</strong> {data.artist}</p>
+            <p><strong>Title:</strong> {data.name}</p>
+            <p><strong>Artist:</strong> {data.artist}</p>
             <span>
-                <p><strong>Link a spotify:</strong> <a href={data.href}>{data.href}</a></p>
-                <p><strong>Fecha lanzamiento:</strong> {data.release_date}</p>
+                <p><strong>Link to spotify:</strong> <a href={data.href}>{data.href}</a></p>
+                <p><strong>Release date:</strong> {data.release_date}</p>
             </span>
             <span>
-                <p><strong>Álbum:</strong> {data.album}</p>
-                <p><strong>Género:</strong> {data.genre}</p>
+                <p><strong>Album:</strong> {data.album}</p>
+                <p><strong>Genre:</strong> {data.genre}</p>
             </span>
-            <button onClick={() => router.push("/canciones")}>
-                Regresar a la lista de reproducción
+            <button onClick={() => router.push("/songs")}>
+                Return to playlist
             </button>
         </div>
     );

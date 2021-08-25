@@ -1,0 +1,15 @@
+.songs{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.song{
+    max-width: 300px;
+    padding: 10px;
+    justify-content: center;
+}
+.songInfo{
+    justify-content: space-between;
+    margin: 10px;
+}
