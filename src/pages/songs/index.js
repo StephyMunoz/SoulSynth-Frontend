@@ -32,7 +32,7 @@ const SongsPage = ({ songs }) => {
 export default SongsPage;
 
 SongsPage.propTypes = {
-  songs: PropTypes.array,
+  songs: PropTypes.array.isRequired,
 };
 
 export async function getStaticProps() {
