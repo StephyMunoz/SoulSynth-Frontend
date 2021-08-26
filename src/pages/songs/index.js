@@ -2,6 +2,7 @@ import styles from "@/styles/songs.module.css";
 import api from "@/apiAxios/api";
 import Image from "next/image";
 import Link from "next/link";
+import PropTypes from "prop-types";
 
 const SongsPage = ({ songs }) => {
   return (
@@ -11,7 +12,6 @@ const SongsPage = ({ songs }) => {
           <Link href={`/songs/${song.id}`}>
             <a>
               <div>
-                {/*<Image src={song.image} width={400} height={300} />*/}
                 <Image src={song.image} width={300} height={200} />
                 <p>
                   <strong>Title: </strong>
@@ -31,14 +31,20 @@ const SongsPage = ({ songs }) => {
 };
 export default SongsPage;
 
-export async function getStaticProps(context) {
+SongsPage.propTypes = {
+  songs: PropTypes.array,
+};
+
+export async function getStaticProps() {
   let songs = [];
 
   try {
     const response = await api.get("/songs");
     console.log("response", response);
     songs = response.data;
-  } catch (e) {}
+  } catch (e) {
+    console.log("e", e);
+  }
   return {
     props: {
       songs,
