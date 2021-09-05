@@ -4,7 +4,9 @@
     "paths": {
       "@/components/*": ["src/components/*"],
       "@/styles/*": ["src/styles/*"],
-      "@/apiAxios/*": ["src/apiAxios/*"]
+      "@/api/*": ["src/api/*"],
+      "@/images/*" : ["src/images/*"],
+      "@/contexts/*": ["src/contexts/*"]
     }
   }
 }

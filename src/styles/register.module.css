@@ -1,0 +1,45 @@
+.SoulSynthNav{
+    background-color: #000000;
+    margin-bottom: 50px;
+}
+.logo{
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 20px;
+}
+.RegisterPage{
+    background-color: #2A2A2A;
+    color: #ffffff;
+    min-height: 100vh;
+}
+.RegisterPageButton{
+    background-color: #40F113;
+    color: black;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+}
+.RegisterPageDivider{
+    background-color: #ffffff;
+    height: 300px;
+    width: 1px;
+}
+.RegisterPageH1{
+    color: #ffffff;
+}
+.RegisterPageButton{
+    font-size: larger;
+}
+.RegisterPageFooter{
+    background-color: #2A2A2A;
+    font-size: 10px;
+    color: #C7C7C7;
+    padding-top: 50px;
+}
+.NavText{
+    background-color: #2A2A2A;
+    border-color: #ffffff;
+    color: #ffffff;
+    border-radius: 25px;
+}
