@@ -1,11 +1,15 @@
 import { Controller, useForm } from "react-hook-form";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, Link as MuiLink, TextField } from "@material-ui/core";
 import Link from "next/link";
 import { useAuth } from "@/contexts/auth";
 import withoutAuth from "../hocs/withoutAuth";
+import PropTypes from "prop-types";
+import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import Routes from "../constants/routes";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
@@ -15,6 +19,9 @@ const schema = yup.object().shape({
 });
 
 const RegisterPage = () => {
+  const [session] = useSession();
+  const router = useRouter();
+
   const {
     handleSubmit,
     formState: { errors },
@@ -27,6 +34,12 @@ const RegisterPage = () => {
   const [errorsList, setErrorsList] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const { register } = useAuth();
+
+  useEffect(() => {
+    if (!session) {
+      router.push(Routes.SignIn);
+    }
+  });
 
   const onSubmit = async (formData) => {
     setUserInfo(null);
@@ -66,102 +79,112 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <div>
-        <p>
-          ¿Already have han account?
-          <Link href="/login" passHref>
-            <MuiLink>Log In</MuiLink>
-          </Link>
-        </p>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {session && (
         <div>
-          <Controller
-            name="username"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Username"
-                variant="outlined"
-                size="small"
-              />
-            )}
-          />
-          <p>{errors.username?.message}</p>
-        </div>
-        <div>
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                type="email"
-                label="Email"
-                variant="outlined"
-                size="small"
-              />
-            )}
-          />
-          <p>{errors.email?.message}</p>
-        </div>
-        <div>
-          <Controller
-            name="country"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Country"
-                variant="outlined"
-                size="small"
-              />
-            )}
-          />
-          <p>{errors.country?.message}</p>
-        </div>
-        <div>
-          <Controller
-            name="displayName"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="DisplayName"
-                variant="outlined"
-                size="small"
-              />
-            )}
-          />
-          <p>{errors.displayName?.message}</p>
-        </div>
-
-        <p>{result}</p>
-        {userInfo && (
           <div>
-            <div>Username: {userInfo.username}</div>
-            <div>Token: {userInfo.token}</div>
+            <p>
+              ¿Already have han account?
+              <Link href="/login" passHref>
+                <MuiLink>Log In</MuiLink>
+              </Link>
+            </p>
           </div>
-        )}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <Controller
+                name="username"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Username"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+              />
+              <p>{errors.username?.message}</p>
+            </div>
+            <div>
+              <Controller
+                name="email"
+                control={control}
+                defaultValue={session.user.email}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    disabled
+                    type="email"
+                    label="Email"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+              />
+              <p>{errors.email?.message}</p>
+            </div>
+            <div>
+              <Controller
+                name="country"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Country"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+              />
+              <p>{errors.country?.message}</p>
+            </div>
+            <div>
+              <Controller
+                name="displayName"
+                control={control}
+                defaultValue={session.user.name}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    disabled
+                    label="Display name"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+              />
+              <p>{errors.displayName?.message}</p>
+            </div>
 
-        {errorsList.length > 0 && (
-          <ul>
-            {errorsList.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        )}
-        <Button type="submit" color="primary" variant="contained">
-          Register
-        </Button>
-      </form>
+            <p>{result}</p>
+            {userInfo && (
+              <div>
+                <div>Username: {userInfo.username}</div>
+                <div>Token: {userInfo.token}</div>
+              </div>
+            )}
+
+            {errorsList.length > 0 && (
+              <ul>
+                {errorsList.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
+            <Button type="submit" color="primary" variant="contained">
+              Register
+            </Button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
 
 export default withoutAuth(RegisterPage);
+
+RegisterPage.propTypes = {
+  session: PropTypes.object,
+};
