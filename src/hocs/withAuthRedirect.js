@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
  * @param WrappedComponent The component that this functionality
  * will be added to.
  * @param LoadingComponent The component that will be rendered while
- * the spotifyconexion state is loading.
+ * the auth state is loading.
  * @param expectedAuth Whether the user should be authenticated for
  * the component to be rendered.
  * @param location The location to redirect to.
