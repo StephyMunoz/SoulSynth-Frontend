@@ -16,7 +16,7 @@ const SignIn = () => {
 
   return (
     <div className={styles.RegisterPage}>
-      <SoulSynthNav />
+      {/*<SoulSynthNav />*/}
       {!session ? (
         <div>
           <Grid
