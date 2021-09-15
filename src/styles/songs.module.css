@@ -13,3 +13,33 @@
     justify-content: space-between;
     margin: 10px;
 }
+
+.scrollv{
+    overflow-y: scroll;
+    height: 500px;
+    width: 100%;
+    max-width: fit-content;
+    margin: auto;
+    background-color: rgb(39, 7, 116);
+}
+
+.button{
+    display: contents!important; 
+    margin-left: 10em !important;
+}
+ 
+.image{
+    border-radius: 50% !important;
+   
+}
+
+
+
+.player{
+    max-width:  contents;
+    position: absolute;
+}
+
+.image:hover{
+    z-index: -1;
+}
