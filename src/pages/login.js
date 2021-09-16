@@ -8,12 +8,14 @@ import { useAuth } from "@/contexts/auth";
 import withoutAuth from "../hocs/withoutAuth";
 import Routes from "../constants/Routes";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
 });
 
 const LoginPage = () => {
+  const [session] = useSession();
   const {
     handleSubmit,
     formState: { errors },
@@ -65,27 +67,48 @@ const LoginPage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onFinishLog)}>
-        <div>
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                type="email"
-                label="Email"
-                variant="outlined"
-                size="small"
-              />
-            )}
-          />
-          <p>{errors.email?.message}</p>
-        </div>
+        {session ? (
+          <div>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue={session.user.email}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  disabled
+                  type="email"
+                  label="Email"
+                  variant="outlined"
+                  size="small"
+                />
+              )}
+            />
+            <p>{errors.email?.message}</p>
+          </div>
+        ) : (
+          <div>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type="email"
+                  label="Email"
+                  variant="outlined"
+                  size="small"
+                />
+              )}
+            />
+            <p>{errors.email?.message}</p>
+          </div>
+        )}
         <Button type="submit" color="primary" variant="contained">
           Log In
         </Button>
-        ,<p>{result}</p>
+        <p>{result}</p>
         {userInfo && <div></div>}
         {errorsList.length > 0 && (
           <ul>
@@ -97,7 +120,7 @@ const LoginPage = () => {
       </form>{" "}
       <div>
         <p>
-          Don´t have an account yet?{" "}
+          Don´t have an account yet? {"   "}
           <Link href="/register" passHref>
             <MuiLink>Register</MuiLink>
           </Link>
