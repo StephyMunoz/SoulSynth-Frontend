@@ -1,6 +1,6 @@
 import styles from "@/styles/register.module.css";
 import styled from "styled-components";
-import { Grid } from "@material-ui/core";
+import { Grid, Link as MuiLink } from "@material-ui/core";
 import Link from "next/link";
 import Image from "next/image";
 import happy from "@/images/happy.png";
@@ -12,10 +12,8 @@ import angry from "@/images/angry.png";
 import api from "@/api/api";
 import withAuth from "@/hocs/withAuth";
 import useSWR from "swr";
-import { Link as MuiLink } from "@material-ui/core";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import React from "react";
 import Loading from "@/components/Loading";
 import Modal from "@material-ui/core/Modal";
 
@@ -24,7 +22,6 @@ const fetcher = (url) => api.get(url).then((res) => res.data);
 const FeelingsChoicePage = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const [loadPlaylist, setLoadPlaylist] = useState(false);
   const { data, error } = useSWR("/playlists", fetcher);
   if (error) {
     return "Ocurrió un error" + error;

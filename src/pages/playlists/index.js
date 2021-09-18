@@ -11,12 +11,6 @@ import { Button } from "@material-ui/core";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import TableContainer from "@material-ui/core/TableContainer";
-import happy from "@/images/happy.png";
-import sad from "@/images/sad.png";
-import curious from "@/images/curious.png";
-import romantic from "@/images/romantic.png";
-import panicked from "@/images/panicked.png";
-import angry from "@/images/angry.png";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
