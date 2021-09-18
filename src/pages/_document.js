@@ -75,7 +75,4 @@ MyDocument.getInitialProps = async (ctx) => {
         sheet.getStyleElement(),
       ],
     };
-  } finally {
-    sheet.seal();
-  }
-};
+  } 
