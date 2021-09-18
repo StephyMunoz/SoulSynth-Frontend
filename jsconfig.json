@@ -6,7 +6,8 @@
       "@/styles/*": ["src/styles/*"],
       "@/api/*": ["src/api/*"],
       "@/images/*" : ["src/images/*"],
-      "@/contexts/*": ["src/contexts/*"]
+      "@/contexts/*": ["src/contexts/*"],
+      "@/hocs/*": ["src/hocs/*"]
     }
   }
 }

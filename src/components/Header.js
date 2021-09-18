@@ -3,6 +3,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import AuthMenu from "@/components/AuthMenu";
 import Image from "next/image";
 import logo from "@/images/SoulSynthLogo.png";
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -15,7 +16,6 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#000000',
   }
   
-}));
 
 const Header = () => {
   const classes = useStyles();
