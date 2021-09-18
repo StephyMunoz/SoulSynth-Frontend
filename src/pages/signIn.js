@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Button from "@material-ui/core/Button";
-import SoulSynthNav from "@/components/SoulSynthNav";
 import styles from "@/styles/register.module.css";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";

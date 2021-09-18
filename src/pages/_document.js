@@ -57,11 +57,12 @@ MyDocument.getInitialProps = async (ctx) => {
   const sheet = new ServerStyleSheet();
   const originalRenderPage = ctx.renderPage;
 
-
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />), // eslint-disable-line react/display-name
-    });
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) =>
+          sheet.collectStyles(sheets.collect(<App {...props} />)), // eslint-disable-line react/display-name
+      });
 
     const initialProps = await Document.getInitialProps(ctx);
 

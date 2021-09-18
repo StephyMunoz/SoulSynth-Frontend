@@ -4,7 +4,6 @@ import AuthMenu from "@/components/AuthMenu";
 import styled from "styled-components";
 import Image from "next/image";
 import logo from "@/images/SoulSynthLogo.png";
-import styles from "@/styles/register.module.css";
 
 const Header = () => {
   return (

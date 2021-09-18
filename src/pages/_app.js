@@ -6,7 +6,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "@/styles/theme";
 import { AuthProvider } from "@/contexts/auth";
 import { Provider } from "next-auth/client";
-import { Grid } from "@material-ui/core";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
