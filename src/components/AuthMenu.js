@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { Link as MuiLink } from "@material-ui/core";
 import ProfileMenu from "@/components/ProfileMenu";
 import { useAuth } from "@/contexts/auth";
 import { Skeleton } from "@material-ui/lab";
