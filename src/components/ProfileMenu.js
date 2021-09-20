@@ -1,13 +1,18 @@
 import React from "react";
-import { IconButton, Menu, MenuItem } from "@material-ui/core";
+import { IconButton, Link as MuiLink, Menu, MenuItem } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import Logout from "@/components/Logout";
 import { useAuth } from "@/contexts/auth";
+import { useRouter } from "next/router";
+import withAuth from "@/hocs/withAuth";
+import Link from "next/link";
+import Divider from "@mui/material/Divider";
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { user } = useAuth();
+  const router = useRouter();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -16,9 +21,58 @@ const ProfileMenu = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleProfile = () => {
+    router.push("/playlists");
+  };
+  const handleAccount = () => {
+    router.push("/users");
+  };
 
   return (
     <div>
+      {/*<div>*/}
+      {/*  <Box*/}
+      {/*    sx={{*/}
+      {/*      display: "flex",*/}
+      {/*      alignItems: "center",*/}
+      {/*      width: "fit-content",*/}
+      {/*      border: (theme) => `1px solid ${theme.palette.divider}`,*/}
+      {/*      borderRadius: 1,*/}
+      {/*      bgcolor: "background.paper",*/}
+      {/*      color: "text.secondary",*/}
+      {/*      "& svg": {*/}
+      {/*        m: 1.5,*/}
+      {/*      },*/}
+      {/*      "& hr": {*/}
+      {/*        mx: 0.5,*/}
+      {/*      },*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <Link href="/" passHref>*/}
+      {/*      <MuiLink>Home</MuiLink>*/}
+      {/*    </Link>*/}
+      {/*    <Divider orientation="vertical" flexItem />*/}
+      {/*    <Link href="/songs/feelings" passHref>*/}
+      {/*      <MuiLink>How are you feeling today?</MuiLink>*/}
+      {/*    </Link>*/}
+      {/*    <Divider orientation="vertical" flexItem />*/}
+      {/*    <Link href="/playlists" passHref>*/}
+      {/*      <MuiLink>My playlists</MuiLink>*/}
+      {/*    </Link>*/}
+      {/*  </Box>*/}
+      {/*</div>*/}
+      <Link href="/" passHref>
+        <MuiLink>Home</MuiLink>
+      </Link>
+      <Divider orientation="vertical" textAlign="center" flexItem />
+      <Link href="/songs/feelings" passHref>
+        <MuiLink>How are you feeling today?</MuiLink>
+      </Link>
+      <Divider orientation="vertical" textAlign="center" flexItem />
+      <Link href="/playlists" passHref>
+        <MuiLink>My playlists</MuiLink>
+      </Link>
+
       <IconButton
         aria-label="account of current user"
         aria-controls="menu-appbar"
@@ -28,6 +82,7 @@ const ProfileMenu = () => {
       >
         <AccountCircle /> {user.username}
       </IconButton>
+
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
@@ -43,8 +98,8 @@ const ProfileMenu = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleAccount}>My account</MenuItem>
+        <MenuItem onClick={handleProfile}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>
           <Logout />
         </MenuItem>
@@ -53,4 +108,4 @@ const ProfileMenu = () => {
   );
 };
 
-export default ProfileMenu;
+export default withAuth(ProfileMenu);
