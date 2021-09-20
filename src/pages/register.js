@@ -9,7 +9,7 @@ import withoutAuth from "../hocs/withoutAuth";
 import PropTypes from "prop-types";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import Routes from "../constants/routes";
+import Routes from "../constants/Routes";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
