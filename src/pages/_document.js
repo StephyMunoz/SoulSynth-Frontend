@@ -60,6 +60,7 @@ MyDocument.getInitialProps = async (ctx) => {
   try {
     ctx.renderPage = () =>
       originalRenderPage({
+        // eslint-disable-next-line
         enhanceApp: (App) => (props) =>
           sheet.collectStyles(sheets.collect(<App {...props} />)), // eslint-disable-line react/display-name
       });
@@ -75,4 +76,7 @@ MyDocument.getInitialProps = async (ctx) => {
         sheet.getStyleElement(),
       ],
     };
-  } 
+  } finally {
+    sheet.seal();
+  }
+};

@@ -5,6 +5,7 @@ const publicRoutes = {
 };
 const privateRoutes = {
   HOME: "/",
+  Feelings: "/songs/feelings",
 };
 
 const Routes = {
