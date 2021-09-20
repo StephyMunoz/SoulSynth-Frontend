@@ -23,7 +23,4 @@ export default NextAuth({
       },
     }),
   ],
-  pages: {
-    registerspotify: "/registerspotify",
-  },
 });

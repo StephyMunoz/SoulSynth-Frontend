@@ -26,7 +26,6 @@ const LoginPage = () => {
   });
   const [result, setResult] = useState("");
   const [errorsList, setErrorsList] = useState([]);
-  const [userInfo, setUserInfo] = useState(null);
   const { login } = useAuth();
   const router = useRouter();
 
@@ -37,13 +36,10 @@ const LoginPage = () => {
       };
       const response = await login(userData);
       console.log("response", response);
-      setUserInfo(response.data);
-
       setResult("User logged in");
       reset();
       router.push(Routes.HOME);
     } catch (e) {
-      console.log("e", e.response);
       const { response } = e;
       setResult("An error has occurred");
 
@@ -56,8 +52,6 @@ const LoginPage = () => {
           for (let field in errors) {
             newErrorList.push(...errors[field]);
           }
-          console.log("errorList", newErrorList);
-
           setErrorsList(newErrorList);
         }
       }
@@ -109,7 +103,6 @@ const LoginPage = () => {
           Log In
         </Button>
         <p>{result}</p>
-        {userInfo && <div></div>}
         {errorsList.length > 0 && (
           <ul>
             {errorsList.map((error) => (
