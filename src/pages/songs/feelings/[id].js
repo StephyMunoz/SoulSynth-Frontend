@@ -143,6 +143,8 @@ const SongsWithFeelingPage = () => {
   const handleOpen2 = (idSong) => {
     setIdSong(idSong);
     setOpen2(true);
+    setNum(1);
+    setOpen3(true);
     // if (num > 0) {
     //
     //   setOpen3(true);
