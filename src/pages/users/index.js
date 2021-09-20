@@ -1,6 +1,7 @@
 import styles from "@/styles/register.module.css";
 import { useAuth } from "@/contexts/auth";
 import Link from "next/link";
+import withAuth from "@/hocs/withAuth";
 
 const AccountPage = () => {
   const { user } = useAuth();
@@ -16,4 +17,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default withAuth(AccountPage);
