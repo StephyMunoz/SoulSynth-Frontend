@@ -5,8 +5,9 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "@/styles/theme";
 import { AuthProvider } from "@/contexts/auth";
-import Logout from "@/components/Logout";
 import { Provider } from "next-auth/client";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -32,10 +33,15 @@ export default function MyApp(props) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Logout />
+          <Header />
           <Provider session={pageProps.session}>
+            {/*<Grid container spacing={3} justifyContent="center">*/}
+            {/*  <Grid item xs={10}>*/}
             <Component {...pageProps} />
+            {/*  </Grid>*/}
+            {/*</Grid>*/}
           </Provider>
+          <Footer />
         </ThemeProvider>
       </AuthProvider>
     </React.Fragment>

@@ -24,19 +24,19 @@
 }
 
 .button{
-    display: contents!important; 
+    display: contents!important;
     margin-left: 10em !important;
 }
- 
+
 .image{
     border-radius: 50% !important;
-   
+
 }
 
 
 
 .player{
-    max-width:  contents;
+    max-width: contents;
     position: absolute;
 }
 

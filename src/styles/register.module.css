@@ -12,6 +12,8 @@
     background-color: #2A2A2A;
     color: #ffffff;
     min-height: 100vh;
+    margin: 0 auto;
+    text-align: center
 }
 .RegisterPageButton{
     background-color: #40F113;
