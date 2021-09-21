@@ -1,8 +1,8 @@
 .songs{
     display: flex;
     flex-wrap: wrap;
-    max-width: 1200px;
     margin: 0 auto;
+    background-color: rgba(42, 42, 42, 1);
 }
 .song{
     max-width: 300px;
@@ -16,13 +16,17 @@
 
 .scrollv{
     overflow-y: scroll;
-    height: 500px;
+    height: 360px;
     width: 100%;
     max-width: fit-content;
     margin: auto;
-    background-color: rgb(39, 7, 116);
+    background-color: rgb(0, 0, 0, 0%) !important;
+    z-index: 1;
 }
 
+.header{
+    background-color: rgb(0, 0, 0, 0%) !important;
+}
 .button{
     display: contents!important;
     margin-left: 10em !important;
@@ -33,13 +37,18 @@
 
 }
 
-
-
-.player{
+.table1{
+    background-color: rgb(0, 0, 0, 0%) !important;
+}
+.player1, .player2{
     max-width: contents;
     position: absolute;
+}
+.player1{
+    display: none !important;
 }
 
 .image:hover{
     z-index: -1;
 }
+
