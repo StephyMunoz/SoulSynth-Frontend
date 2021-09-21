@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 import styles from "@/styles/register.module.css";
 import styled from "styled-components";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -63,7 +64,7 @@ const LoginPage = () => {
   return (
     <div className={styles.RegisterPage}>
       <Title>If you already have an account here, just Log in!</Title>
-      <form onSubmit={handleSubmit(onFinishLog)}>
+      <form onSubmit={handleSubmit(onFinishLog)} className={styles.Form}>
         {session ? (
           <div>
             <Controller
@@ -71,14 +72,17 @@ const LoginPage = () => {
               control={control}
               defaultValue={session.user.email}
               render={({ field }) => (
-                <TextField
-                  {...field}
-                  disabled
-                  type="email"
-                  label="Email"
-                  variant="outlined"
-                  size="small"
-                />
+                <div>
+                  <TextField
+                    {...field}
+                    disabled
+                    type="email"
+                    label="Email"
+                    variant="standard"
+                    size="small"
+                  />
+                  <AccountCircleIcon />
+                </div>
               )}
             />
             <p>{errors.email?.message}</p>
@@ -90,24 +94,23 @@ const LoginPage = () => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <TextField
-                  {...field}
-                  type="email"
-                  label="Email"
-                  variant="outlined"
-                  size="small"
-                />
+                <div>
+                  <TextField
+                    {...field}
+                    type="email"
+                    label="Email"
+                    variant="standard"
+                    size="small"
+                    borderColor="white"
+                  />
+                  <AccountCircleIcon />
+                </div>
               )}
             />
             <p>{errors.email?.message}</p>
           </div>
         )}
-        <Button
-          type="submit"
-          color="primary"
-          variant="contained"
-          // className={styles.RegisterPageButton}
-        >
+        <Button type="submit" color="primary" variant="contained">
           Log In
         </Button>
         <p>{result}</p>
@@ -137,27 +140,3 @@ const Title = styled.h1`
   font-weight: lighter;
   padding-bottom: 50px;
 `;
-
-// const BootstrapButton = styled(Button)({
-//   boxShadow: "none",
-//   textTransform: "none",
-//   fontSize: 20,
-//   padding: "6px 10px",
-//   border: "25px",
-//   lineHeight: 1.5,
-//   backgroundColor: "#46FC18",
-//   borderColor: "#000000",
-//   textColor: "#000000",
-//   fontFamily: [
-//     "-apple-system",
-//     "BlinkMacSystemFont",
-//     '"Segoe UI"',
-//     "Roboto",
-//     '"Helvetica Neue"',
-//     "Arial",
-//     "sans-serif",
-//     '"Apple Color Emoji"',
-//     '"Segoe UI Emoji"',
-//     '"Segoe UI Symbol"',
-//   ],
-// });
