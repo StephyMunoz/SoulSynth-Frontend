@@ -15,13 +15,7 @@
     margin: 0 auto;
     text-align: center
 }
-.RegisterPageButton{
-    background-color: #40F113;
-    color: black;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    border-radius: 25px;
-}
+
 .RegisterPageDivider{
     background-color: #ffffff;
     height: 300px;
@@ -38,10 +32,4 @@
     font-size: 10px;
     color: #C7C7C7;
     padding-top: 50px;
-}
-.NavText{
-    background-color: #2A2A2A;
-    border-color: #ffffff;
-    color: #ffffff;
-    border-radius: 25px;
 }
