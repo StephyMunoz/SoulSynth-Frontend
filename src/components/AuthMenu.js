@@ -6,10 +6,10 @@ import { Skeleton } from "@material-ui/lab";
 import Grid from "@material-ui/core/Grid";
 import styles from "@/styles/register.module.css";
 import Button from "@material-ui/core/Button";
-import { Link as MuiLink } from "@material-ui/core";
-import Image from "next/image";
-import happy from "@/images/happy.png";
-import romantic from "@/images/romantic.png";
+// import { Link as MuiLink } from "@material-ui/core";
+// import Image from "next/image";
+// import happy from "@/images/happy.png";
+// import romantic from "@/images/romantic.png";
 
 const AuthMenu = () => {
   const { user } = useAuth();

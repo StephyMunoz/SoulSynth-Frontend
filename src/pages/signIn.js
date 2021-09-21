@@ -13,7 +13,8 @@ import styled from "styled-components";
 
 const SignIn = () => {
   const [session] = useSession();
-  console.log("var", process.env.SPOTIFY_REDIRECT_URI);
+
+  // console.log("var", process.env.SPOTIFY_REDIRECT_URI);
 
   return (
     <div className={styles.RegisterPage}>

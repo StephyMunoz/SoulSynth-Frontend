@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import Routes from "../constants/Routes";
 import styles from "@/styles/register.module.css";
 import styled from "styled-components";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
@@ -38,11 +38,11 @@ const RegisterPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const { register } = useAuth();
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.push(Routes.SignIn);
-  //   }
-  // });
+  useEffect(() => {
+    if (!session) {
+      router.push(Routes.SignIn);
+    }
+  });
 
   const onSubmit = async (formData) => {
     setUserInfo(null);
@@ -83,7 +83,7 @@ const RegisterPage = () => {
   return (
     <div className={styles.RegisterPage}>
       <Title>
-        Almost there...just confirm this <br /> information and we're good to go
+        Almost there...just confirm this <br /> information and we`re good to go
       </Title>
       {!session && (
         <div>
@@ -113,24 +113,24 @@ const RegisterPage = () => {
               />
               <p>{errors.username?.message}</p>
             </div>
-            {/*<div>*/}
-            {/*  <Controller*/}
-            {/*    name="email"*/}
-            {/*    control={control}*/}
-            {/*    defaultValue={session.user.email}*/}
-            {/*    render={({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        {...field}*/}
-            {/*        disabled*/}
-            {/*        type="email"*/}
-            {/*        label="Email"*/}
-            {/*        variant="standard"*/}
-            {/*        size="small"*/}
-            {/*      />*/}
-            {/*    )}*/}
-            {/*  />*/}
-            {/*  <p>{errors.email?.message}</p>*/}
-            {/*</div>*/}
+            <div>
+              <Controller
+                name="email"
+                control={control}
+                defaultValue={session.user.email}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    disabled
+                    type="email"
+                    label="Email"
+                    variant="standard"
+                    size="small"
+                  />
+                )}
+              />
+              <p>{errors.email?.message}</p>
+            </div>
             <div>
               <Controller
                 name="country"
@@ -147,23 +147,23 @@ const RegisterPage = () => {
               />
               <p>{errors.country?.message}</p>
             </div>
-            {/*<div>*/}
-            {/*  <Controller*/}
-            {/*    name="displayName"*/}
-            {/*    control={control}*/}
-            {/*    defaultValue={session.user.name}*/}
-            {/*    render={({ field }) => (*/}
-            {/*      <TextField*/}
-            {/*        {...field}*/}
-            {/*        disabled*/}
-            {/*        label="Display name"*/}
-            {/*        variant="standard"*/}
-            {/*        size="small"*/}
-            {/*      />*/}
-            {/*    )}*/}
-            {/*  />*/}
-            {/*  <p>{errors.displayName?.message}</p>*/}
-            {/*</div>*/}
+            <div>
+              <Controller
+                name="displayName"
+                control={control}
+                defaultValue={session.user.name}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    disabled
+                    label="Display name"
+                    variant="standard"
+                    size="small"
+                  />
+                )}
+              />
+              <p>{errors.displayName?.message}</p>
+            </div>
 
             <p>{result}</p>
             {userInfo && (
