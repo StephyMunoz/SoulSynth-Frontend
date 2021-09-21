@@ -73,7 +73,6 @@ const SongsWithFeelingPage = () => {
   const [errorsList, setErrorsList] = useState([]);
   const [idSong, setIdSong] = useState(0);
   const [num, setNum] = useState(0);
-  // const [playlistID, setPlaylistId] = useState(0);
 
   console.log("data", songs);
   console.log("dataP", playlists);
@@ -134,19 +133,22 @@ const SongsWithFeelingPage = () => {
     }
     console.log("result", result);
   };
+  // if (playlists.length !== 0) {
+  //   for (let i = 0; i < playlists.length; i++) {
+  //     if (id == playlists[i].feeling) {
+  //       setNum(num + 1);
+  //     }
+  //   }
+  // }
   const handleOpen2 = (idSong) => {
-    if (playlists.length !== 0) {
-      for (let i = 0; i < playlists.length; i++) {
-        if (id == playlists[i].feeling) {
-          setNum(num + 1);
-        }
-      }
-    }
     setIdSong(idSong);
-    if (num > 0) {
-      setOpen2(true);
-      setOpen3(true);
-    }
+    setOpen2(true);
+    setNum(1);
+    setOpen3(true);
+    // if (num > 0) {
+    //
+    //   setOpen3(true);
+    // }
   };
 
   console.log("result", result);
@@ -240,8 +242,7 @@ const SongsWithFeelingPage = () => {
                   )
               )}
             </div>
-            {/*<Button onClick={handleRedirect}>Discover new music</Button>*/}
-            {/*Or*/}
+            <Button onClick={handleOpen}>Add a new playlist</Button>
             <Button onClick={handleClose2}>Cancel</Button>
           </Box>
         </Modal>

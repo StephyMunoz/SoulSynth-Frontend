@@ -3,7 +3,7 @@
  */
 import { useAuth } from "@/contexts/auth";
 import Loading from "@/components/Loading";
-import Routes from "../constants/routes";
+import Routes from "../constants/Routes";
 import { useRouter } from "next/router";
 
 /**

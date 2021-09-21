@@ -2,7 +2,7 @@
  * Created by chalosalvador on 8/16/20
  */
 import withAuthRedirect from "./withAuthRedirect";
-import Routes from "../constants/routes";
+import Routes from "../constants/Routes";
 
 /**
  * Require the user to be authenticated in order to render the component.

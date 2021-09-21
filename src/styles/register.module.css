@@ -13,7 +13,8 @@
     color: #ffffff;
     min-height: 100vh;
     margin: 0 auto;
-    text-align: center
+    text-align: center;
+    padding-top: 50px;
 }
 .RegisterPageButton{
     background-color: #40F113;
@@ -44,4 +45,7 @@
     border-color: #ffffff;
     color: #ffffff;
     border-radius: 25px;
+}
+.Form {
+    color: #ffffff;
 }
