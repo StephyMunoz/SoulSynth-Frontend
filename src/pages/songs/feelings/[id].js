@@ -2,7 +2,6 @@ import api from "@/api/api";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
 import styles from "@/styles/songs.module.css";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -26,6 +25,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Playlist from "@/api/playlist";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import styled from "styled-components";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
@@ -173,8 +173,11 @@ const SongsWithFeelingPage = () => {
   console.log("num", num);
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Create a new playlists</Button>
+    <div className={stylesBackground.RegisterPage}>
+      <StyledButton onClick={handleOpen}>
+        Create a new playlist
+        <AddCircleOutlineIcon />
+      </StyledButton>
       <Modal
         keepMounted
         open={open}
@@ -194,7 +197,7 @@ const SongsWithFeelingPage = () => {
                   <TextField
                     {...field}
                     label="Playlist Name"
-                    variant="outlined"
+                    variant="standard"
                     size="small"
                   />
                 )}
@@ -249,8 +252,8 @@ const SongsWithFeelingPage = () => {
       </div>
 
       <TableContainer
-        component={Paper}
-        className={stylesBackground.RegisterPage}
+        // component={Paper}
+        className={stylesBackground.Table}
       >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -316,3 +319,9 @@ const SongsWithFeelingPage = () => {
 };
 
 export default withAuth(SongsWithFeelingPage);
+
+const StyledButton = styled(Button)`
+  background-color: #46fc18;
+  margin-bottom: 25px;
+  align-items: flex-start;
+`;

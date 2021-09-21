@@ -38,7 +38,6 @@
     background-color: #2A2A2A;
     font-size: 10px;
     color: #C7C7C7;
-    padding-top: 50px;
 }
 .NavText{
     background-color: #2A2A2A;
@@ -47,5 +46,9 @@
     border-radius: 25px;
 }
 .Form {
-    color: #ffffff;
+    color: #ffffff !important;
+}
+.Table {
+    color: #ffffff !important;
+    background-color: #2A2A2A;
 }
