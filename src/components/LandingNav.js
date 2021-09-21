@@ -21,13 +21,15 @@ export default function Nav() {
   return (
     <div className={classes.background}>
       <AppBar>
-        <Image
-          className={classes.logo}
-          src={logo}
-          height={100}
-          width={100}
-          alt="No image found"
-        />
+        <Link href="/" passHref>
+          <Image
+            className={classes.logo}
+            src={logo}
+            height={100}
+            width={100}
+            alt="No image found"
+          />
+        </Link>
         <Link href="/" passHref>
           <Button variant="contained" color="primary">
             I already have an account

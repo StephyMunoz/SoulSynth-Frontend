@@ -10,6 +10,9 @@ import PropTypes from "prop-types";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import Routes from "../constants/Routes";
+import styles from "@/styles/register.module.css";
+import styled from "styled-components";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
@@ -78,14 +81,17 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      {session && (
+    <div className={styles.RegisterPage}>
+      <Title>
+        Almost there...just confirm this <br /> information and we`re good to go
+      </Title>
+      {!session && (
         <div>
           <div>
             <p>
               ¿Already have han account?
               <Link href="/login" passHref>
-                <MuiLink>Log In</MuiLink>
+                <MuiLink> Log In</MuiLink>
               </Link>
             </p>
           </div>
@@ -99,9 +105,10 @@ const RegisterPage = () => {
                   <TextField
                     {...field}
                     label="Username"
-                    variant="outlined"
+                    variant="standard"
                     size="small"
                   />
+                  // <Account
                 )}
               />
               <p>{errors.username?.message}</p>
@@ -117,7 +124,7 @@ const RegisterPage = () => {
                     disabled
                     type="email"
                     label="Email"
-                    variant="outlined"
+                    variant="standard"
                     size="small"
                   />
                 )}
@@ -133,7 +140,7 @@ const RegisterPage = () => {
                   <TextField
                     {...field}
                     label="Country"
-                    variant="outlined"
+                    variant="standard"
                     size="small"
                   />
                 )}
@@ -150,7 +157,7 @@ const RegisterPage = () => {
                     {...field}
                     disabled
                     label="Display name"
-                    variant="outlined"
+                    variant="standard"
                     size="small"
                   />
                 )}
@@ -174,7 +181,7 @@ const RegisterPage = () => {
               </ul>
             )}
             <Button type="submit" color="primary" variant="contained">
-              Register
+              ACCEPT
             </Button>
           </form>
         </div>
@@ -188,3 +195,8 @@ export default withoutAuth(RegisterPage);
 RegisterPage.propTypes = {
   session: PropTypes.object,
 };
+
+const Title = styled.h1`
+  font-weight: lighter;
+  margin: 50px;
+`;

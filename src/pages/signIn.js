@@ -9,9 +9,12 @@ import Footer from "@/components/Footer";
 import Register from "./register";
 import { signIn, useSession } from "next-auth/client";
 import withoutAuth from "../hocs/withoutAuth";
+import styled from "styled-components";
 
 const SignIn = () => {
   const [session] = useSession();
+
+  // console.log("var", process.env.SPOTIFY_REDIRECT_URI);
 
   return (
     <div className={styles.RegisterPage}>
@@ -26,18 +29,18 @@ const SignIn = () => {
             alignItems="center"
           >
             <Grid item direction="column">
-              <h1>Link your Spotify account to sign up...</h1>
+              <Title>Link your Spotify account to sign up...</Title>
             </Grid>
           </Grid>
           <Grid container direction="row" justify="space-around" align="middle">
             <Grid direction="column">
               <Grid direction="row" justify="space-around" align="middle">
-                <p>
+                <Paragraph>
                   This site uses Spotify to play custom music <br />
                   just for you, to make that happen you need
                   <br />
                   to log in to your Spotify account...
-                </p>
+                </Paragraph>
               </Grid>
               <Grid
                 direction="row"
@@ -66,13 +69,13 @@ const SignIn = () => {
             </div>
             <Grid direction="column" span={8}>
               <Grid direction="row" justify="space-around" align="middle">
-                <p>
+                <Paragraph>
                   ...Or if you don’t have a Spotify account,
                   <br />
                   make one by clicking on this button!
                   <br />
                   Don’t worry, we’ll wait.
-                </p>
+                </Paragraph>
               </Grid>
               <Grid
                 direction="row"
@@ -114,3 +117,12 @@ const SignIn = () => {
 };
 
 export default withoutAuth(SignIn);
+
+const Title = styled.h1`
+  font-weight: lighter;
+  margin: 50px;
+`;
+
+const Paragraph = styled.p`
+  margin-top: 70px;
+`;
