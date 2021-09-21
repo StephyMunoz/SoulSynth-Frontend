@@ -1,7 +1,6 @@
-import {React, useState, useEffect, useRef} from "react";
+import {React, useState} from "react";
 import styles from "@/styles/songs.module.css";
 import api from "@/api/api";
-import Image from "next/image";
 import PropTypes from "prop-types";
 import PauseIcon from "@material-ui/icons/Pause";
 import Table from "@material-ui/core/Table";
@@ -11,21 +10,17 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { Button } from "@material-ui/core";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import withAuth from "@/hocs/withAuth";
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
 import PauseRounded from '@mui/icons-material/PauseRounded';
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
-import { CardMedia } from '@mui/material';
 import $ from "jquery";
 
 
@@ -90,7 +85,6 @@ const SongsPage = ({ songs }) => {
 
   const [player, setPlayer] = useState(false);
   const [songId, setsongId] = useState(undefined);
-  const [previousId, setPreviousId] = useState(undefined);
   
   return (
     <div className={styles.songs}>
