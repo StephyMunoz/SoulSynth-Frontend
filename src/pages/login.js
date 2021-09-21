@@ -9,6 +9,8 @@ import withoutAuth from "../hocs/withoutAuth";
 import Routes from "../constants/Routes";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
+import styles from "@/styles/register.module.css";
+import styled from "styled-components";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -59,7 +61,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.RegisterPage}>
+      <Title>If you already have an account here, just Log in!</Title>
       <form onSubmit={handleSubmit(onFinishLog)}>
         {session ? (
           <div>
@@ -99,7 +102,12 @@ const LoginPage = () => {
             <p>{errors.email?.message}</p>
           </div>
         )}
-        <Button type="submit" color="primary" variant="contained">
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          // className={styles.RegisterPageButton}
+        >
           Log In
         </Button>
         <p>{result}</p>
@@ -124,3 +132,32 @@ const LoginPage = () => {
 };
 
 export default withoutAuth(LoginPage);
+
+const Title = styled.h1`
+  font-weight: lighter;
+  padding-bottom: 50px;
+`;
+
+// const BootstrapButton = styled(Button)({
+//   boxShadow: "none",
+//   textTransform: "none",
+//   fontSize: 20,
+//   padding: "6px 10px",
+//   border: "25px",
+//   lineHeight: 1.5,
+//   backgroundColor: "#46FC18",
+//   borderColor: "#000000",
+//   textColor: "#000000",
+//   fontFamily: [
+//     "-apple-system",
+//     "BlinkMacSystemFont",
+//     '"Segoe UI"',
+//     "Roboto",
+//     '"Helvetica Neue"',
+//     "Arial",
+//     "sans-serif",
+//     '"Apple Color Emoji"',
+//     '"Segoe UI Emoji"',
+//     '"Segoe UI Symbol"',
+//   ],
+// });
