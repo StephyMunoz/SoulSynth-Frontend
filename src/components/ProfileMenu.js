@@ -1,12 +1,17 @@
 import React from "react";
-import { IconButton, Link as MuiLink, Menu, MenuItem } from "@material-ui/core";
+import {
+  Divider,
+  IconButton,
+  Link as MuiLink,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import Logout from "@/components/Logout";
 import { useAuth } from "@/contexts/auth";
 import { useRouter } from "next/router";
 import withAuth from "@/hocs/withAuth";
 import Link from "next/link";
-import { Divider } from "@material-ui/core";
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -153,15 +153,18 @@ const PlaylistPage = () => {
                               ))}
                             </ul>
                           )}
-                          <Button
-                            type="submit"
-                            color="primary"
-                            variant="contained"
-                          >
-                            Update
-                          </Button>
-
-                          <Button onClick={handleClose2}>Cancel</Button>
+                          <TableCell>
+                            <Button
+                              type="submit"
+                              color="primary"
+                              variant="contained"
+                            >
+                              Update
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <Button onClick={handleClose2}>Cancel</Button>
+                          </TableCell>
                         </form>
                       </Box>
                     </Modal>
@@ -199,5 +202,6 @@ const PlaylistPage = () => {
 export default PlaylistPage;
 
 const Title = styled.h1`
+  font-family: "Goudy Stout";
   font-weight: lighter;
 `;
