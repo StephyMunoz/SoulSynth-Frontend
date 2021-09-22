@@ -18,6 +18,7 @@ import Modal from "@material-ui/core/Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
+import styled from "styled-components";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
@@ -108,7 +109,7 @@ const PlaylistPage = () => {
 
   return (
     <div className={styles.RegisterPage}>
-      <h1>My Playlists</h1>
+      <Title>My Playlists</Title>
       <TableContainer className={styles.scrollv}>
         <Table stickyHeader aria-label="sticky table">
           <TableBody styles={"max"}>
@@ -196,3 +197,7 @@ const PlaylistPage = () => {
 };
 
 export default PlaylistPage;
+
+const Title = styled.h1`
+  font-weight: lighter;
+`;
