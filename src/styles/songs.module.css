@@ -17,18 +17,17 @@
 .scrollv{
     overflow-y: scroll;
     height: 360px;
-    width: 100%;
+    width: 80% !important;
     max-width: fit-content;
     margin: auto;
+    margin-top: 1em;
     background-color: rgb(0, 0, 0, 0%) !important;
     z-index: 1;
 }
 
-.header{
-    background-color: rgb(0, 0, 0, 0%) !important;
-}
+
 .button{
-    color: beige !important;
+    color:  #fff !important;
     padding: 15px !important;
 }
 
@@ -39,6 +38,22 @@
 
 .table1{
     background-color: rgb(0, 0, 0, 0%) !important;
+    
+}
+
+.table1 h3{
+    color: #fff;
+}
+
+.table1 th{
+    color:rgb(255, 255, 255);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    background-color: rgb(17, 11, 9) !important;
+}
+
+.table1 header{
+    background-color: blue;
 }
 .player1, .player2{
     max-width: contents;

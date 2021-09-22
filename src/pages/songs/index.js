@@ -150,7 +150,7 @@ const SongsPage = ({ songs }) => {
             mt: -2,
           }}
         >
-          <TinyText>{formatDuration(position)}</TinyText>
+          <TinyText>{formatDuration(position)} </TinyText>
           <TinyText>-{formatDuration(duration - position)}</TinyText>
         </Box>
         <Box
@@ -188,7 +188,7 @@ const SongsPage = ({ songs }) => {
   
       <TableContainer component={Paper} className={styles.scrollv}>
         <Table stickyHeader className={styles.table1} >
-          <TableHead className={styles.header}>
+          <TableHead >
             <TableRow>
               <TableCell align="right"></TableCell>
               <TableCell align="right">Title</TableCell>
@@ -212,7 +212,7 @@ const SongsPage = ({ songs }) => {
                         $('#'+ song.id + 'play').attr('style', 'display:block !important')
                         $('#'+ song.id + 'pause').attr('style', 'display:none !important')
                         setPlayer(true)
-                        setsongId(song.id)                        
+                                       
                         
                       }
                       
@@ -220,6 +220,13 @@ const SongsPage = ({ songs }) => {
                        $('#'+ song.id + 'pause').attr('style', 'display:block !important')
                         $('#'+ song.id + 'play').attr('style', 'display:none !important')
                         setPlayer(!player)
+                        if(songId == null){
+                          setsongId(song.id)
+                        } else if (song.id != songId){
+                          $('#'+ songId + 'play').attr('style', 'display:block !important')
+                          $('#'+ songId + 'pause').attr('style', 'display:none !important')
+                          setsongId(song.id)
+                        }     
                         
                       }
                       
