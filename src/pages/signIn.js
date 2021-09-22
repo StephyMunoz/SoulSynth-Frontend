@@ -10,9 +10,21 @@ import Register from "./register";
 import { signIn, useSession } from "next-auth/client";
 import withoutAuth from "../hocs/withoutAuth";
 import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  registerPageButton: {
+    backgroundColor: "#40F113",
+    color: "black",
+    marginBottom: "5px",
+    borderRadius: "25px",
+    textAlign: "center",
+  },
+}));
 
 const SignIn = () => {
   const [session] = useSession();
+  const classes = useStyles();
 
   // console.log("var", process.env.SPOTIFY_REDIRECT_URI);
 
@@ -46,14 +58,14 @@ const SignIn = () => {
                 direction="row"
                 justify="space-around"
                 align="middle"
-                className={styles.RegisterPageButton}
+                className={classes.registerPageButton}
               >
                 <Button
                   onClick={() =>
                     signIn("https://accounts.spotify.com/authorize")
                   }
                 >
-                  Sign in with Spotify
+                  Sign in with Spotify...
                   <Image
                     //id="landing_logo"
                     height={25}
@@ -81,10 +93,10 @@ const SignIn = () => {
                 direction="row"
                 justify="space-around"
                 align="middle"
-                className={styles.RegisterPageButton}
+                className={classes.registerPageButton}
               >
                 <Button>
-                  Create Spotify Account
+                  Create Spotify Account...
                   <Image
                     //id="landing_logo"
                     height={25}
@@ -125,4 +137,7 @@ const Title = styled.h1`
 
 const Paragraph = styled.p`
   margin-top: 70px;
+  font-size: 15px;
+  font-weight: 100;
+  padding-bottom: 30px;
 `;

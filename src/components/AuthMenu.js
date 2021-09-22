@@ -3,43 +3,62 @@ import Link from "next/link";
 import ProfileMenu from "@/components/ProfileMenu";
 import { useAuth } from "@/contexts/auth";
 import { Skeleton } from "@material-ui/lab";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import styles from "@/styles/register.module.css";
 import Button from "@material-ui/core/Button";
-// import { Link as MuiLink } from "@material-ui/core";
-// import Image from "next/image";
-// import happy from "@/images/happy.png";
-// import romantic from "@/images/romantic.png";
+
+const useStyles = makeStyles(() => ({
+  buttonGridDiv: {
+    padding: "5px",
+  },
+  registerPageButton: {
+    backgroundColor: "#40F113",
+    color: "black",
+    marginBottom: "5px",
+    borderRadius: "25px",
+    textAlign: "center",
+  },
+  goBackButton: {
+    backgroundColor: "#2A2A2A",
+    color: "#ffffff",
+    borderRadius: "25px",
+    textAlign: "center",
+    borderColor: "#ffffff",
+  },
+  signUpButton: {
+    backgroundColor: "#ffffff",
+    color: "#000000",
+    borderRadius: "20px",
+    textAlign: "center",
+    borderColor: "#2A2A2A",
+  },
+}));
 
 const AuthMenu = () => {
   const { user } = useAuth();
-
+  const classes = useStyles();
   if (user === null) {
     return <Skeleton variant="rect" width={100} height={30} />;
   }
 
   if (!user) {
     return (
-      <div>
+      <div className={classes.buttonGridDiv}>
         <Grid container>
-          <Grid item className={styles.RegisterPageButton}>
+          <Grid item className={classes.signUpButton}>
+            <Link href="signIn">
+              <Button>Sign Up</Button>
+            </Link>
+          </Grid>
+          <Grid item direction={"row"} className={classes.registerPageButton}>
             <Link href="/login">
               <Button>Log In!</Button>
             </Link>
           </Grid>
-          <Grid item>
-            <div className={styles.NavText}>
-              <Link href="/">
-                <Button>Go Home!</Button>
-              </Link>
-            </div>
-          </Grid>
-          <Grid item>
-            <div className={styles.NavText}>
-              <Link href="/signIn">
-                <Button>Sign Up</Button>
-              </Link>
-            </div>
+          <Grid item direction={"row"}>
+            <Link href="/">
+              <Button className={classes.goBackButton}>Go Home!</Button>
+            </Link>
           </Grid>
         </Grid>
       </div>

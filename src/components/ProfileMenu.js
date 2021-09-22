@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/auth";
 import { useRouter } from "next/router";
 import withAuth from "@/hocs/withAuth";
 import Link from "next/link";
-import Divider from "@mui/material/Divider";
+import { Divider } from "@material-ui/core";
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
