@@ -12,7 +12,10 @@ import { useRouter } from "next/router";
 import Routes from "../constants/Routes";
 import styles from "@/styles/register.module.css";
 import styled from "styled-components";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import PublicIcon from "@mui/icons-material/Public";
+import PersonIcon from "@mui/icons-material/Person";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
@@ -85,7 +88,7 @@ const RegisterPage = () => {
       <Title>
         Almost there...just confirm this <br /> information and we`re good to go
       </Title>
-      {!session && (
+      {session && (
         <div>
           <div>
             <p>
@@ -102,13 +105,15 @@ const RegisterPage = () => {
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Username"
-                    variant="standard"
-                    size="small"
-                  />
-                  // <Account
+                  <div>
+                    <TextField
+                      {...field}
+                      label="Username"
+                      variant="standard"
+                      size="small"
+                    />
+                    <AccountCircleIcon />
+                  </div>
                 )}
               />
               <p>{errors.username?.message}</p>
@@ -119,14 +124,17 @@ const RegisterPage = () => {
                 control={control}
                 defaultValue={session.user.email}
                 render={({ field }) => (
-                  <TextField
-                    {...field}
-                    disabled
-                    type="email"
-                    label="Email"
-                    variant="standard"
-                    size="small"
-                  />
+                  <div>
+                    <TextField
+                      {...field}
+                      disabled
+                      type="email"
+                      label="Email"
+                      variant="standard"
+                      size="small"
+                    />
+                    <EmailIcon />
+                  </div>
                 )}
               />
               <p>{errors.email?.message}</p>
@@ -137,12 +145,15 @@ const RegisterPage = () => {
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Country"
-                    variant="standard"
-                    size="small"
-                  />
+                  <div>
+                    <TextField
+                      {...field}
+                      label="Country"
+                      variant="standard"
+                      size="small"
+                    />
+                    <PublicIcon />
+                  </div>
                 )}
               />
               <p>{errors.country?.message}</p>
@@ -153,13 +164,16 @@ const RegisterPage = () => {
                 control={control}
                 defaultValue={session.user.name}
                 render={({ field }) => (
-                  <TextField
-                    {...field}
-                    disabled
-                    label="Display name"
-                    variant="standard"
-                    size="small"
-                  />
+                  <div>
+                    <TextField
+                      {...field}
+                      disabled
+                      label="Display name"
+                      variant="standard"
+                      size="small"
+                    />
+                    <PersonIcon />
+                  </div>
                 )}
               />
               <p>{errors.displayName?.message}</p>
@@ -198,5 +212,4 @@ RegisterPage.propTypes = {
 
 const Title = styled.h1`
   font-weight: lighter;
-  margin: 50px;
 `;
