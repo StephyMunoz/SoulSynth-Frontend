@@ -22,7 +22,7 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import $ from "jquery";
-
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
 
@@ -207,23 +207,25 @@ const SongsPage = ({ songs }) => {
 
                    
                       
-                      setsongId(song.id)
-                      if( !player && songId == song.id){
+                     //setsongId(song.id)
+                      if( !player ){
                         $('#'+ song.id + 'play').attr('style', 'display:block !important')
                         $('#'+ song.id + 'pause').attr('style', 'display:none !important')
                         setPlayer(true)
+                        setsongId(song.id)                        
                         
                       }
                       
-                      if( player  && songId == song.id){
-                        $('#'+ song.id + 'pause').attr('style', 'display:block !important')
+                      if( player  ){
+                       $('#'+ song.id + 'pause').attr('style', 'display:block !important')
                         $('#'+ song.id + 'play').attr('style', 'display:none !important')
-                        setPlayer(false)
+                        setPlayer(!player)
+                        
                       }
                       
                     
                     
-                  }} >
+                  }} className={styles.button}>
                     
                     
                     <PlayArrowIcon id={song.id + "play"} fontSize="large" value='false' className={styles.player2} /> 
@@ -235,15 +237,16 @@ const SongsPage = ({ songs }) => {
                   </Button>
                   
                 </TableCell>
-                <TableCell align="right">{song.name}</TableCell>
-                <TableCell align="right">{song.artist}</TableCell>
-                <TableCell align="right">{song.album}</TableCell>
-                <TableCell align="right">{song.genre}</TableCell>
+                <TableCell align="right"><h3>{song.name}</h3></TableCell>
+                <TableCell align="right"><h3>{song.artist}</h3></TableCell>
+                <TableCell align="right"><h3>{song.album}</h3></TableCell>
+                <TableCell align="right"><h3>{song.genre}</h3></TableCell>
                 <TableCell align="right">
               
-                <IconButton aria-label="AddCircleOutlineIcon">
-                    </IconButton>
-                  
+                <Button className={styles.button}>
+  
+                  <AddCircleOutlineIcon />
+                </Button>
                 </TableCell>
               </TableRow>
             ))}

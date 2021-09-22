@@ -28,8 +28,8 @@
     background-color: rgb(0, 0, 0, 0%) !important;
 }
 .button{
-    display: contents!important;
-    margin-left: 10em !important;
+    color: beige !important;
+    padding: 15px !important;
 }
 
 .image{
