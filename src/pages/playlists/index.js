@@ -21,6 +21,7 @@ import Link from "next/link";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@mui/material/Alert";
+import withAuth from "@/hocs/withAuth";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
@@ -295,7 +296,7 @@ const PlaylistPage = () => {
   );
 };
 
-export default PlaylistPage;
+export default withAuth(PlaylistPage);
 
 // const Title = styled.h1`
 //   font-family: "Goudy Stout";
