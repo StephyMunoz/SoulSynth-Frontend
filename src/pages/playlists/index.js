@@ -18,6 +18,9 @@ import Modal from "@material-ui/core/Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
+import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
@@ -30,8 +33,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  fontFamily:'Times New Roman',
-  fontSize: 'large',
+  fontFamily: "Times New Roman",
+  fontSize: "large",
   width: 400,
   height: 250,
   textaline: "center",
@@ -51,6 +54,9 @@ const PlaylistPage = () => {
   const handleClose2 = () => setOpen2(false);
   const [playlistID, setPlaylistId] = useState(0);
   const [errorsList, setErrorsList] = useState([]);
+  const [openAlert, setOpenAlert] = useState(true);
+  const [success, setSuccess] = useState(null);
+  const [errorAction, setErrorAction] = useState(null);
   const {
     handleSubmit,
     formState: { errors },
@@ -67,10 +73,22 @@ const PlaylistPage = () => {
   if (!data) {
     return <Loading />;
   }
+  const handleOpenAlert = () => {
+    setOpenAlert(true);
+  };
+  const handleCloseAlert = () => setOpenAlert(false);
 
   const handleDeletePlaylist = async (id) => {
     const response = await Playlist.delete(id);
     console.log("response", response);
+    if (response.status == 204) {
+      setSuccess("Playlist deleted successfully");
+      handleClose();
+      handleOpenAlert();
+    } else {
+      setErrorAction("Something went wrong, please try again later");
+      handleClose();
+    }
   };
 
   const onSubmit = async (values) => {
@@ -80,6 +98,14 @@ const PlaylistPage = () => {
 
       const response = await Playlist.update(playlistID, formData);
       console.log("response", response);
+      if (response.status == 200) {
+        setSuccess("Playlist updated");
+        handleClose();
+        handleOpenAlert();
+      } else {
+        setErrorAction("Something went wrong, please try again later");
+        handleClose();
+      }
       reset();
       handleClose2();
     } catch (e) {
@@ -112,31 +138,73 @@ const PlaylistPage = () => {
 
   return (
     <div className={styles.RegisterPage}>
+      {success && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                {success}
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      )}
+      {errorAction && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                {errorAction}
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      )}
       <h1>My Playlists</h1>
       <TableContainer className={styles.scrollv}>
         <Table>
           <TableBody styles={"max"}>
             {data.map((playlist) => (
               <TableRow key={playlist.id}>
-                
-                  
                 <TableCell align="right" className={styles.namecel}>
                   <Link href={`/playlists/${playlist.id}`}>
-                    <MuiLink underline="hover"><h2>{playlist.name}</h2></MuiLink>
-                    </Link>
+                    <MuiLink underline="hover">
+                      <h2>{playlist.name}</h2>
+                    </MuiLink>
+                  </Link>
                 </TableCell>
-                  
-                
+
                 <TableCell>
                   <Button className={styles.button}>
-                    <ModeEditIcon fontSize="large" onClick={() => handleOpen2(playlist.id)} />
+                    <ModeEditIcon
+                      fontSize="large"
+                      onClick={() => handleOpen2(playlist.id)}
+                    />
                     <Modal
                       open={open2}
                       onClose={handleClose2}
                       aria-labelledby="Update playlist"
                       aria-describedby="Update playlist"
                     >
-                      <Box sx={{ ...style, textAlign:'center' , color:'#fff' }}>
+                      <Box
+                        sx={{ ...style, textAlign: "center", color: "#fff" }}
+                      >
                         <h2 id="parent-modal-title">Update playlist</h2>
                         <form onSubmit={handleSubmit(onSubmit)}>
                           <div>
@@ -167,12 +235,18 @@ const PlaylistPage = () => {
                               type="submit"
                               color="success"
                               variant="contained"
-                              size= "large"
+                              size="large"
                             >
                               Update
                             </Button>
-                          
-                            <Button color="error" size= "large"onClick={handleClose2}>Cancel</Button>
+
+                            <Button
+                              color="error"
+                              size="large"
+                              onClick={handleClose2}
+                            >
+                              Cancel
+                            </Button>
                           </div>
                         </form>
                       </Box>
@@ -181,27 +255,36 @@ const PlaylistPage = () => {
                   <Button className={styles.button}>
                     <DeleteOutlineIcon fontSize="large" onClick={handleOpen} />
 
-                
-                  <Modal
-                    hideBackdrop
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="child-modal-title"
-                    aria-describedby="child-modal-description"
-                  >
-                    <Box sx={{ ...style, textAlign:'center' , color:'#fff' }}>
-                      <h2>Are you sure yo want to delete the playlist?</h2>
-                      <div className={styles.modalbutton}>
-
-                        <Button  color="success"size= "large" onClick={() => handleDeletePlaylist(playlist.id)}>
-                        Yes
-                        </Button>
-                        <Button color="error" size= "large" onClick={handleClose}>Cancel</Button>
-
-                      </div>
-                    </Box>
-                  </Modal>
-                </Button>
+                    <Modal
+                      hideBackdrop
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="child-modal-title"
+                      aria-describedby="child-modal-description"
+                    >
+                      <Box
+                        sx={{ ...style, textAlign: "center", color: "#fff" }}
+                      >
+                        <h2>Are you sure yo want to delete the playlist?</h2>
+                        <div className={styles.modalbutton}>
+                          <Button
+                            color="success"
+                            size="large"
+                            onClick={() => handleDeletePlaylist(playlist.id)}
+                          >
+                            Yes
+                          </Button>
+                          <Button
+                            color="error"
+                            size="large"
+                            onClick={handleClose}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </Box>
+                    </Modal>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

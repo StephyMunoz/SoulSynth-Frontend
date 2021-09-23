@@ -30,6 +30,7 @@ import $ from "jquery";
 import Paper from "@material-ui/core/Paper";
 import styledC from "styled-components";
 import SpotifyPlayer from "react-spotify-player";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
@@ -50,8 +51,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "rgba(30, 232, 74, 0.76)",
-  textAlign: 'center',
-  fontSize: 'large',
+  textAlign: "center",
+  fontSize: "large",
   border: "2px solid #000",
   boxShadow: 24,
   pt: 2,
@@ -62,7 +63,7 @@ const style = {
 };
 const styleNew = {
   position: "absolute",
-  textAlign: 'center',
+  textAlign: "center",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -131,6 +132,9 @@ const SongsWithFeelingPage = () => {
   const [player, setPlayer] = useState(false);
   const [songId, setsongId] = useState(undefined);
   const [selectSong, setSelectSong] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [errorAction, setErrorAction] = useState(null);
+  const [openAlert, setOpenAlert] = useState(true);
 
   if (error) {
     return "An error has ocurred" + error;
@@ -157,14 +161,13 @@ const SongsWithFeelingPage = () => {
       reset();
       console.log("response", response);
       handleClose();
-      if (result === "Playlist successfully added") {
-        return (
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert severity="success">
-              This is a success alert — check it out!
-            </Alert>
-          </Stack>
-        );
+      if (response.status == 201) {
+        setSuccess("Playlist successfully added");
+        handleClose();
+        handleOpenAlert();
+      } else {
+        setErrorAction("Something went wrong, please try again later");
+        handleClose();
       }
     } catch (e) {
       console.log("e", e.response);
@@ -192,10 +195,27 @@ const SongsWithFeelingPage = () => {
     setIdSong(idSong);
     setOpen2(true);
   };
+  const handleCloseAlert = () => setOpenAlert(false);
+
+  const handleOpenAlert = () => {
+    setOpenAlert(true);
+  };
 
   const handleAdd = async (idPlay) => {
     const response = await Playlist.store(idPlay, idSong);
     console.log("response", response);
+    if (response.status == 200 || response.status == 201) {
+      setSuccess("Song added successfully to your playlist");
+      handleClose();
+      handleOpenAlert();
+    } else if (response.status == 208) {
+      setErrorAction("This song is already in your playlist");
+      handleClose();
+      handleOpenAlert();
+    } else {
+      setErrorAction("Something went wrong, please try again later");
+      handleClose();
+    }
     handleClose2();
   };
 
@@ -205,6 +225,44 @@ const SongsWithFeelingPage = () => {
 
   return (
     <div className={styles.songs}>
+      {success && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                {success}
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      )}
+      {errorAction && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                {errorAction}
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      )}
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={12}>
           <StyledButton onClick={handleOpen} className={classes.modalButton}>
@@ -212,7 +270,7 @@ const SongsWithFeelingPage = () => {
             <AddCircleOutlineIcon />
           </StyledButton>
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           {selectSong && (
             <SpotifyPlayer
               uri={selectSong.link}
@@ -306,8 +364,12 @@ const SongsWithFeelingPage = () => {
               </Table>
             </TableContainer>
             <div className={styles1.modalbutton}>
-            <Button className={styles1.modalbutton1} onClick={handleOpen}>Add a new playlist</Button>
-            <Button className={styles1.modalbutton2} onClick={handleClose2}>Cancel</Button>
+              <Button className={styles1.modalbutton1} onClick={handleOpen}>
+                Add a new playlist
+              </Button>
+              <Button className={styles1.modalbutton2} onClick={handleClose2}>
+                Cancel
+              </Button>
             </div>
           </StyledBox>
         </Modal>
