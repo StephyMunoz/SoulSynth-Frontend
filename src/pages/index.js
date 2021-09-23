@@ -7,6 +7,7 @@ import Image from "next/image";
 import headphones from "@/images/headphones.jpeg";
 
 const useStyles = makeStyles(() => ({
+  
   background: {
     backgroundColor: "#2A2A2A"
   },
