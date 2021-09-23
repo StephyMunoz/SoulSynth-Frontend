@@ -25,6 +25,10 @@ import styledC from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import SpotifyPlayer from "react-spotify-player";
 import Alert from "@mui/material/Alert";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const size = {
   width: "100%",
@@ -84,8 +88,10 @@ const PlaylistUserPage = () => {
   const [songId, setsongId] = useState(undefined);
   const [songIdDelete, setSongIdDelete] = useState(undefined);
   const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(true);
   const [songSelect, setSongSelect] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [errorAction, setErrorAction] = useState(null);
   const handleClose = () => setOpen(false);
 
   if (error) {
@@ -100,14 +106,22 @@ const PlaylistUserPage = () => {
     const response = await Playlist.deleteSong(id, songIdDelete);
 
     if (response.status == 204) {
-      setSuccess("Playlist deleted succesfully");
+      setSuccess("Song deleted successfully from your playlist");
+      handleClose();
+      handleOpenAlert();
+    } else {
+      setErrorAction("Something went wrong, please try again later");
       handleClose();
     }
-    handleClose();
   };
   const handleOpen = (idS) => {
     setOpen(true);
     setSongIdDelete(idS);
+  };
+  const handleCloseAlert = () => setOpenAlert(false);
+
+  const handleOpenAlert = () => {
+    setOpenAlert(true);
   };
   const handlePlay = (songItem) => {
     setSongSelect(songItem);
@@ -117,7 +131,38 @@ const PlaylistUserPage = () => {
       {success && (
         <Grid container>
           <Grid item xs={12}>
-            <Alert onClose={() => {}}>{success}</Alert>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                {success}
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      )}
+      {errorAction && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Snackbar
+              open={openAlert}
+              autoHideDuration={6000}
+              onClose={handleCloseAlert}
+            >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                {errorAction}
+              </Alert>
+            </Snackbar>
           </Grid>
         </Grid>
       )}
