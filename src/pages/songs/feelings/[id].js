@@ -25,56 +25,22 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@mui/material/Typography";
-import Slider from "@mui/material/Slider";
-import IconButton from "@mui/material/IconButton";
-import PauseRounded from "@mui/icons-material/PauseRounded";
-import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
-import FastForwardRounded from "@mui/icons-material/FastForwardRounded";
-import FastRewindRounded from "@mui/icons-material/FastRewindRounded";
 import $ from "jquery";
 import Paper from "@material-ui/core/Paper";
-import { styled, useTheme } from "@mui/material/styles";
 import styledC from "styled-components";
-
-const Widget = styled("div")(({ theme }) => ({
-  padding: 16,
-  borderRadius: 16,
-  width: 800,
-  maxWidth: "100%",
-  margin: "auto",
-  position: "relative",
-  zIndex: 1,
-  backgroundColor:
-    theme.palette.mode === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.4)",
-  backdropFilter: "blur(40px)",
-}));
-
-const CoverImage = styled("div")({
-  width: 100,
-  height: 100,
-  objectFit: "cover",
-  overflow: "hidden",
-  flexShrink: 0,
-  borderRadius: 8,
-  backgroundColor: "rgba(0,0,0,0.08)",
-  "& > img": {
-    width: "100%",
-  },
-});
-
-const TinyText = styled(Typography)({
-  fontSize: "1.5em",
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
+import SpotifyPlayer from "react-spotify-player";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
 const schema = yup.object().shape({
   name: yup.string().required(),
 });
+
+const size = {
+  width: "100%",
+  height: 300,
+};
+const view = "list"; // or 'coverart'
 
 const style = {
   position: "absolute",
@@ -159,15 +125,9 @@ const SongsWithFeelingPage = () => {
   const [errorsList, setErrorsList] = useState([]);
   const [idSong, setIdSong] = useState(0);
   const classes = useStyles();
-  const theme = useTheme();
-  const duration = 200; // seconds
-  const [position, setPosition] = useState(32);
-  const [paused, setPaused] = useState(false);
   const [player, setPlayer] = useState(false);
   const [songId, setsongId] = useState(undefined);
-
-  console.log("data", songs);
-  console.log("dataP", playlists);
+  const [selectSong, setSelectSong] = useState(null);
 
   if (error) {
     return "An error has ocurred" + error;
@@ -223,58 +183,43 @@ const SongsWithFeelingPage = () => {
         }
       }
     }
-    console.log("result", result);
   };
-  // if (playlists.length !== 0) {
-  //   for (let i = 0; i < playlists.length; i++) {
-  //     if (id == playlists[i].feeling) {
-  //       setNum(num + 1);
-  //     }
-  //   }
-  // }
+
   const handleOpen2 = (idSong) => {
     setIdSong(idSong);
     setOpen2(true);
-    // if (num > 0) {
-    //
-    //   setOpen3(true);
-    // }
   };
 
-  console.log("result", result);
-
-  // const handleAddSong = (id) => {
-  //   if (playlists.length !== 0) {
-  //     for (let i = 0; i < playlists.length; i++) {
-  //       if (id === playlists[i].feeling) {
-  //         setNum(+1);
-  //       }
-  //     }
-  //   }
-  // };
-  console.log("id", id);
-  console.log("idSong", idSong);
   const handleAdd = async (idPlay) => {
-    console.log("idPlay", idPlay);
     const response = await Playlist.store(idPlay, idSong);
     console.log("response", response);
     handleClose2();
   };
-  function formatDuration(value) {
-    const minute = Math.floor(value / 60);
-    const secondLeft = value - minute * 60;
-    return `${minute}:${secondLeft < 9 ? `0${secondLeft}` : secondLeft}`;
-  }
-  const mainIconColor = theme.palette.mode === "dark" ? "#fff" : "#000";
-  // const mainIconColor = "light" === "dark" ? "#fff" : "#000";
-  // console.log("theme", theme.palette.mode);
+
+  const handleSelectSong = (songItem) => {
+    setSelectSong(songItem);
+  };
 
   return (
     <div className={styles.songs}>
-      <StyledButton onClick={handleOpen} className={classes.modalButton}>
-        Create a new playlist
-        <AddCircleOutlineIcon />
-      </StyledButton>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={12}>
+          <StyledButton onClick={handleOpen} className={classes.modalButton}>
+            Create a new playlist
+            <AddCircleOutlineIcon />
+          </StyledButton>
+        </Grid>
+        <Grid item xs={12} alignContent="center">
+          {selectSong && (
+            <SpotifyPlayer
+              uri={selectSong.link}
+              size={size}
+              autoplay={true}
+              play={true}
+            />
+          )}
+        </Grid>
+      </Grid>
       <Modal
         keepMounted
         open={open}
@@ -363,104 +308,6 @@ const SongsWithFeelingPage = () => {
           </StyledBox>
         </Modal>
       </div>
-      <Box sx={{ width: "100%", overflow: "hidden" }}>
-        <Widget sx={{ padding: "2em", margin: "1.5em auto" }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.5em",
-            }}
-          >
-            <CoverImage sx={{ width: "15em", height: "15em" }}></CoverImage>
-          </Box>
-          <Slider
-            aria-label="time-indicator"
-            size="small"
-            value={position}
-            min={0}
-            step={1}
-            max={duration}
-            onChange={(_, value) => setPosition(value)}
-            sx={{
-              color:
-                theme.palette.mode === "dark" ? "#fff" : "rgba(0,0,0,0.87)",
-              height: 4,
-              "& .MuiSlider-thumb": {
-                width: 8,
-                height: 8,
-                transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
-                "&:before": {
-                  boxShadow: "0 2px 12px 0 rgba(0,0,0,0.4)",
-                },
-                "&:hover, &.Mui-focusVisible": {
-                  boxShadow: `0px 0px 0px 8px ${
-                    theme.palette.mode === "dark"
-                      ? "rgb(255 255 255 / 16%)"
-                      : "rgb(0 0 0 / 16%)"
-                  }`,
-                },
-                "&.Mui-active": {
-                  width: 20,
-                  height: 20,
-                },
-              },
-              "& .MuiSlider-rail": {
-                opacity: 0.28,
-              },
-            }}
-          />
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              mt: -2,
-            }}
-          >
-            <TinyText>{() => formatDuration(position)} </TinyText>
-            <TinyText>-{() => formatDuration(duration - position)}</TinyText>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              mt: -1,
-            }}
-          >
-            <IconButton aria-label="previous song">
-              <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
-            </IconButton>
-            <IconButton
-              aria-label={paused ? "play" : "pause"}
-              onClick={() => setPaused(!paused)}
-            >
-              {paused ? (
-                <PlayArrowRounded
-                  fontSize="large"
-                  sx={{
-                    margin: "0 1em",
-                  }}
-                  htmlColor={mainIconColor}
-                />
-              ) : (
-                <PauseRounded
-                  fontSize="large"
-                  sx={{
-                    margin: "0 1em",
-                  }}
-                  htmlColor={mainIconColor}
-                />
-              )}
-            </IconButton>
-            <IconButton aria-label="next song">
-              <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
-            </IconButton>
-          </Box>
-        </Widget>
-      </Box>
 
       <TableContainer component={Paper} className={styles.scrollv}>
         <Table stickyHeader className={styles.table1}>
@@ -526,6 +373,7 @@ const SongsWithFeelingPage = () => {
                       fontSize="large"
                       value="false"
                       className={styles.player2}
+                      onClick={() => handleSelectSong(song)}
                     />
 
                     <PauseIcon

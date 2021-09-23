@@ -7,7 +7,7 @@ import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Link as MuiLink } from "@material-ui/core";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -18,7 +18,6 @@ import Modal from "@material-ui/core/Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
-import styled from "styled-components";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
@@ -31,8 +30,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
+  fontFamily:'Times New Roman',
+  fontSize: 'large',
   width: 400,
-  bgcolor: "background.paper",
+  height: 250,
+  textaline: "center",
+  bgcolor: "rgba(30, 232, 74, 0.76)",
   border: "2px solid #000",
   boxShadow: 24,
   pt: 2,
@@ -109,25 +112,31 @@ const PlaylistPage = () => {
 
   return (
     <div className={styles.RegisterPage}>
-      <Title>My Playlists</Title>
+      <h1>My Playlists</h1>
       <TableContainer className={styles.scrollv}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table>
           <TableBody styles={"max"}>
             {data.map((playlist) => (
               <TableRow key={playlist.id}>
-                <Link href={`/playlists/${playlist.id}`}>
-                  <TableCell align="right">{playlist.name}</TableCell>
-                </Link>
-                <div>
+                
+                  
+                <TableCell align="right" className={styles.namecel}>
+                  <Link href={`/playlists/${playlist.id}`}>
+                    <MuiLink underline="hover"><h2>{playlist.name}</h2></MuiLink>
+                    </Link>
+                </TableCell>
+                  
+                
+                <TableCell>
                   <Button className={styles.button}>
-                    <ModeEditIcon onClick={() => handleOpen2(playlist.id)} />
+                    <ModeEditIcon fontSize="large" onClick={() => handleOpen2(playlist.id)} />
                     <Modal
                       open={open2}
                       onClose={handleClose2}
                       aria-labelledby="Update playlist"
                       aria-describedby="Update playlist"
                     >
-                      <Box sx={{ ...style, width: 300 }}>
+                      <Box sx={{ ...style, textAlign:'center' , color:'#fff' }}>
                         <h2 id="parent-modal-title">Update playlist</h2>
                         <form onSubmit={handleSubmit(onSubmit)}>
                           <div>
@@ -138,8 +147,8 @@ const PlaylistPage = () => {
                               render={({ field }) => (
                                 <TextField
                                   {...field}
-                                  label="Playlist Name"
-                                  variant="outlined"
+                                  label="Standard"
+                                  variant="standard"
                                   size="small"
                                 />
                               )}
@@ -153,43 +162,47 @@ const PlaylistPage = () => {
                               ))}
                             </ul>
                           )}
-                          <TableCell>
+                          <div className={styles.modalbutton}>
                             <Button
                               type="submit"
-                              color="primary"
+                              color="success"
                               variant="contained"
+                              size= "large"
                             >
                               Update
                             </Button>
-                          </TableCell>
-                          <TableCell>
-                            <Button onClick={handleClose2}>Cancel</Button>
-                          </TableCell>
+                          
+                            <Button color="error" size= "large"onClick={handleClose2}>Cancel</Button>
+                          </div>
                         </form>
                       </Box>
                     </Modal>
                   </Button>
                   <Button className={styles.button}>
-                    <DeleteOutlineIcon onClick={handleOpen} />
-                  </Button>
-                </div>
-                <Modal
-                  hideBackdrop
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="child-modal-title"
-                  aria-describedby="child-modal-description"
-                >
-                  <Box sx={{ ...style, width: 500 }}>
-                    <h3>Are you sure yo want to delete the playlist?</h3>
+                    <DeleteOutlineIcon fontSize="large" onClick={handleOpen} />
 
-                    <Button onClick={() => handleDeletePlaylist(playlist.id)}>
-                      Yes
-                    </Button>
-                    <h6>Or</h6>
-                    <Button onClick={handleClose}>Cancel</Button>
-                  </Box>
-                </Modal>
+                
+                  <Modal
+                    hideBackdrop
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="child-modal-title"
+                    aria-describedby="child-modal-description"
+                  >
+                    <Box sx={{ ...style, textAlign:'center' , color:'#fff' }}>
+                      <h2>Are you sure yo want to delete the playlist?</h2>
+                      <div className={styles.modalbutton}>
+
+                        <Button  color="success"size= "large" onClick={() => handleDeletePlaylist(playlist.id)}>
+                        Yes
+                        </Button>
+                        <Button color="error" size= "large" onClick={handleClose}>Cancel</Button>
+
+                      </div>
+                    </Box>
+                  </Modal>
+                </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -201,7 +214,7 @@ const PlaylistPage = () => {
 
 export default PlaylistPage;
 
-const Title = styled.h1`
-  font-family: "Goudy Stout";
-  font-weight: lighter;
-`;
+// const Title = styled.h1`
+//   font-family: "Goudy Stout";
+//   font-weight: lighter;
+// `;

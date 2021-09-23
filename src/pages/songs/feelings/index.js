@@ -1,6 +1,6 @@
 import styles from "@/styles/register.module.css";
-import styled from "styled-components";
-import { Button, Grid, Link as MuiLink } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Typography, Grid, Link as MuiLink } from "@material-ui/core";
 import Image from "next/image";
 import happy from "@/images/happy.png";
 import sad from "@/images/sad.png";
@@ -19,6 +19,85 @@ import Box from "@material-ui/core/Box";
 import Link from "next/link";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
+
+const useStyles = makeStyles(() => ({
+  mainDiv: {
+    backgroundColor: "#2A2A2A",
+    display: "block",
+    justifyContent: "center",
+    paddingTop: "50px"
+  },
+  Title: {
+    color: "#ffffff",
+    textAlign: "center",
+    paddingBottom: "100px",
+    fontWeight: "bold"
+  },
+  feelingGrid: {
+    margin: "0 auto",
+    width: "1200px",
+    paddingBottom: "20px"
+  },
+  HappyContainer: {
+    backgroundColor: "#e3da04",
+    width: "500px",
+    height: "100px",
+    borderRadius: "20px",
+    color: "#ffffff",
+    justifyContent: "space-between",
+    paddingLeft: "30px"
+  },
+  RomanticContainer: {
+    backgroundColor: "#bd4772",
+    width: "500px",
+    height: "100px",
+    borderRadius: "20px",
+    color: "#ffffff",
+    justifyContent: "space-between",
+    paddingLeft: "30px"
+  },
+  SadContainer: {
+    backgroundColor: "#070636",
+    width: "500px",
+    height: "100px",
+    borderRadius: "20px",
+    color: "#ffffff",
+    justifyContent: "space-between",
+    paddingLeft: "30px"
+  },
+  PanickedContainer: {
+    backgroundColor: "#49bf55",
+    width: "500px",
+    height: "100px",
+    borderRadius: "20px",
+    color: "#ffffff",
+    justifyContent: "space-between",
+    paddingLeft: "30px"
+  },
+  AngryContainer: {
+    backgroundColor: "#db0606",
+    width: "500px",
+    height: "100px",
+    borderRadius: "20px",
+    color: "#ffffff",
+    justifyContent: "space-between",
+    paddingLeft: "30px"
+  },
+  CuriousContainer: {
+    backgroundColor: "#ffffff",
+    width: "500px",
+    height: "100px",
+    borderRadius: "20px",
+    color: "black",
+    justifyContent: "space-between",
+    paddingLeft: "30px"
+  },
+  feeling: {
+    fontWeight: "bold",
+    paddingTop: "20px"
+  }
+
+}));
 
 const style = {
   position: "absolute",
@@ -39,6 +118,7 @@ const FeelingsChoicePage = () => {
   const [feeling, setFeeling] = useState(0);
   const router = useRouter();
   const { data, error } = useSWR("/playlists", fetcher);
+  const classes = useStyles();
   if (error) {
     return "Ocurrió un error" + error;
   }
@@ -70,60 +150,100 @@ const FeelingsChoicePage = () => {
   };
 
   return (
-    <div className={styles.RegisterPage}>
-      <Title>How are you feeling today?</Title>
-      <Grid container spacing={2}>
+    // <div className={styles.RegisterPage}>
+    <div className={classes.mainDiv}>
+      <Typography variant="h3" className={classes.Title}>
+        How are you feeling today?
+      </Typography>
+      <Grid container spacing={8} className={classes.feelingGrid}>
         <Grid item xs={6}>
           <MuiLink onClick={() => getPlaylists(1)}>
-            <HappyContainer>
-              Happy
-              <Image src={happy} width={75} />
-            </HappyContainer>
+            <Grid container className={classes.HappyContainer}>
+              <Grid item direction={"column"}>
+                <Typography variant="h3" className={classes.feeling}>
+                  Happy
+                </Typography>
+              </Grid>
+              <Grid item direction={"column"}>
+                <Image src={happy} width={100} height={100} />
+              </Grid>
+            </Grid>
           </MuiLink>
         </Grid>
         <Grid item xs={6}>
           <MuiLink onClick={() => getPlaylists(2)}>
-            <RomanticContainer>
-              Romantic
-              <Image src={romantic} width={75} />
-            </RomanticContainer>
+            <Grid container className={classes.RomanticContainer}>
+              <Grid item direction={"column"}>
+                <Typography variant="h3" className={classes.feeling}>
+                  Romantic
+                </Typography>
+              </Grid>
+              <Grid item direction={"column"}>
+                <Image src={romantic} width={100} height={100} />
+              </Grid>
+            </Grid>
           </MuiLink>
         </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={8} className={classes.feelingGrid}>
         <Grid item xs={6}>
           <MuiLink onClick={() => getPlaylists(3)}>
-            <SadContainer>
-              Sad
-              <Image src={sad} width={75} />
-            </SadContainer>
+            <Grid container className={classes.SadContainer}>
+              <Grid item direction={"column"}>
+                <Typography variant="h3" className={classes.feeling}>
+                  Sad
+                </Typography>
+              </Grid>
+              <Grid item direction={"column"}>
+                <Image src={sad} width={100} height={100} />
+              </Grid>
+            </Grid>
           </MuiLink>
         </Grid>
         <Grid item xs={6}>
           <MuiLink onClick={() => getPlaylists(4)}>
-            <AngryContainer>
-              Angry
-              <Image src={angry} width={75} />
-            </AngryContainer>
+            <Grid container className={classes.AngryContainer}>
+              <Grid item direction={"column"}>
+                <Typography variant="h3" className={classes.feeling}>
+                  Angry
+                </Typography>
+              </Grid>
+              <Grid item direction={"column"}>
+                <Image src={angry} width={100} height={100} />
+              </Grid>
+            </Grid>
           </MuiLink>
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
+
+      <Grid container spacing={8} className={classes.feelingGrid}>
         <Grid item xs={6}>
           <MuiLink onClick={() => getPlaylists(5)}>
-            <PanickedContainer>
-              Panicked
-              <Image src={panicked} width={75} />
-            </PanickedContainer>
+            <Grid container className={classes.PanickedContainer}>
+              <Grid item direction={"column"}>
+                <Typography variant="h3" className={classes.feeling}>
+                  Panicked
+                </Typography>
+              </Grid>
+              <Grid item direction={"column"}>
+                <Image src={panicked} width={100} height={100} />
+              </Grid>
+            </Grid>
           </MuiLink>
         </Grid>
         <Grid item xs={6}>
           <MuiLink onClick={() => getPlaylists(6)}>
-            <CuriousContainer>
-              Curious
-              <Image src={curious} width={75} />
-            </CuriousContainer>
+            <Grid container className={classes.CuriousContainer}>
+              <Grid item direction={"column"}>
+                <Typography variant="h3" className={classes.feeling}>
+                  Curious
+                </Typography>
+              </Grid>
+              <Grid item direction={"column"}>
+                <Image src={curious} width={100} height={100} />
+              </Grid>
+            </Grid>
           </MuiLink>
         </Grid>
       </Grid>
@@ -160,26 +280,3 @@ const FeelingsChoicePage = () => {
 
 export default withAuth(FeelingsChoicePage);
 
-const Title = styled.h1`
-    color: #ffffff,
-    font-size: 30px,
-    text-align: center,
-`;
-const HappyContainer = styled.div`
-  background-color: #e3da04;
-`;
-const SadContainer = styled.div`
-  background-color: #070636;
-`;
-const RomanticContainer = styled.div`
-  background-color: #bd4772;
-`;
-const AngryContainer = styled.div`
-  background-color: #db0606;
-`;
-const PanickedContainer = styled.div`
-  background-color: #49bf55;
-`;
-const CuriousContainer = styled.div`
-  background-color: #ffffff;
-`;
