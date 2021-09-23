@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 const useStyles = makeStyles(() => ({
   buttonGridDiv: {
     padding: "5px",
-    width: "300px",
+    width: "310px",
     display: "flex",
     textAlign: "center"
   },
@@ -49,7 +49,7 @@ const AuthMenu = () => {
   if (!user) {
     return (
       <div className={classes.buttonGridDiv}>
-        <Grid container spacing={3}>
+        <Grid container>
           <Grid item direction={"column"} className={classes.signUpButton}>
             <Link href="signIn">
               <Button>Sign Up</Button>
