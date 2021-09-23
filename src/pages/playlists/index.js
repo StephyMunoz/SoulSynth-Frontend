@@ -18,7 +18,6 @@ import Modal from "@material-ui/core/Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
-import styled from "styled-components";
 
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
