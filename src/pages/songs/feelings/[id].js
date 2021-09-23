@@ -200,7 +200,7 @@ const SongsWithFeelingPage = () => {
   const handleAdd = async (idPlay) => {
     const response = await Playlist.store(idPlay, idSong);
     console.log("response", response);
-    if (response.status == 200 || response.status == 201) {
+    if (response.status == 200) {
       setSuccess("Song added successfully to your playlist");
       handleClose();
       handleOpenAlert();
