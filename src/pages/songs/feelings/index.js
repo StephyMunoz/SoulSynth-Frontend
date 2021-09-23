@@ -150,7 +150,6 @@ const FeelingsChoicePage = () => {
   };
 
   return (
-    // <div className={styles.RegisterPage}>
     <div className={classes.mainDiv}>
       <Typography variant="h3" className={classes.Title}>
         How are you feeling today?
