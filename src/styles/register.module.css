@@ -56,6 +56,11 @@
     font-size: xx-large;
     color: aqua;
 }
+.RegisterPage h4{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: large;
+    color: rgb(0, 255, 149);
+}
 .RegisterPageDivider{
     background-color: #ffffff;
     height: 300px;
