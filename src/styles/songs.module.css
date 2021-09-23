@@ -16,7 +16,7 @@
 
 .scrollv{
     overflow-y: scroll;
-    height: 320px;
+    height: 100%;
     width: 75% !important;
     max-width: fit-content;
     margin: auto;
