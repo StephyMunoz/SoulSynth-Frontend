@@ -1,3 +1,4 @@
+
 import {React, useState} from "react";
 import styles from "@/styles/songs.module.css";
 import api from "@/api/api";
@@ -50,6 +51,7 @@ const CoverImage = styled('div')({
   backgroundColor: 'rgba(0,0,0,0.08)',
   '& > img': {
     width: '100%',
+
   },
 });
 
@@ -60,15 +62,10 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
-
-
-
-
-
-
 const SongsPage = ({ songs }) => {
 
   
+
 
   const theme = useTheme();
   const duration = 200; // seconds
@@ -184,6 +181,7 @@ const SongsPage = ({ songs }) => {
       <TableContainer component={Paper} className={styles.scrollv}>
         <Table stickyHeader className={styles.table1} >
           <TableHead >
+
             <TableRow>
               <TableCell align="right"></TableCell>
               <TableCell align="right">Title</TableCell>
@@ -236,9 +234,11 @@ const SongsPage = ({ songs }) => {
                     
                     
                   
+
                   </Button>
                   
                 </TableCell>
+
                 <TableCell align="right"><h3>{song.name}</h3></TableCell>
                 <TableCell align="right"><h3>{song.artist}</h3></TableCell>
                 <TableCell align="right"><h3>{song.album}</h3></TableCell>
@@ -249,6 +249,7 @@ const SongsPage = ({ songs }) => {
   
                   <AddCircleOutlineIcon />
                 </Button>
+
                 </TableCell>
               </TableRow>
             ))}
@@ -260,7 +261,9 @@ const SongsPage = ({ songs }) => {
 };
 
 
+
 export default (SongsPage);
+
 
 SongsPage.propTypes = {
   songs: PropTypes.array.isRequired,

@@ -86,9 +86,13 @@ const RegisterPage = () => {
   return (
     <div className={styles.RegisterPage}>
       <Title>
+<<<<<<< HEAD
 
         Almost there...just confirm this <br /> information and we re good to go
 
+=======
+        Almost there...just confirm this <br /> information and we re good to go
+>>>>>>> b1de5f24da9d66d65e027f0d76be739e4e40eeb8
       </Title>
       {session && (
         <div>
