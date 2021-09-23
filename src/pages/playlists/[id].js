@@ -24,6 +24,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import styledC from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import SpotifyPlayer from "react-spotify-player";
+import Alert from "@mui/material/Alert";
 
 const size = {
   width: "100%",
@@ -84,6 +85,7 @@ const PlaylistUserPage = () => {
   const [songIdDelete, setSongIdDelete] = useState(undefined);
   const [open, setOpen] = useState(false);
   const [songSelect, setSongSelect] = useState(null);
+  const [success, setSuccess] = useState(null);
   const handleClose = () => setOpen(false);
 
   if (error) {
@@ -96,7 +98,11 @@ const PlaylistUserPage = () => {
 
   const handleDeleteSong = async () => {
     const response = await Playlist.deleteSong(id, songIdDelete);
-    console.log("response", response);
+
+    if (response.status == 204) {
+      setSuccess("Playlist deleted succesfully");
+      handleClose();
+    }
     handleClose();
   };
   const handleOpen = (idS) => {
@@ -108,6 +114,13 @@ const PlaylistUserPage = () => {
   };
   return (
     <div className={styles.songs}>
+      {success && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Alert onClose={() => {}}>{success}</Alert>
+          </Grid>
+        </Grid>
+      )}
       {songSelect && (
         <Grid container>
           <Grid item xs={12}>
