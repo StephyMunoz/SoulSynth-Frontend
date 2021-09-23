@@ -10,11 +10,14 @@ import Button from "@material-ui/core/Button";
 const useStyles = makeStyles(() => ({
   buttonGridDiv: {
     padding: "5px",
+    width: "300px",
+    display: "flex",
+    textAlign: "center"
   },
   registerPageButton: {
+    margin: "0px 15px",
     backgroundColor: "#40F113",
     color: "black",
-    marginBottom: "5px",
     borderRadius: "25px",
     textAlign: "center",
   },
@@ -24,6 +27,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: "25px",
     textAlign: "center",
     borderColor: "#ffffff",
+    margin: "0px 15px"
   },
   signUpButton: {
     backgroundColor: "#ffffff",
@@ -31,6 +35,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: "20px",
     textAlign: "center",
     borderColor: "#2A2A2A",
+    margin: "0px 15px"
   },
 }));
 
@@ -44,20 +49,20 @@ const AuthMenu = () => {
   if (!user) {
     return (
       <div className={classes.buttonGridDiv}>
-        <Grid container>
-          <Grid item className={classes.signUpButton}>
+        <Grid container spacing={3}>
+          <Grid item direction={"column"} className={classes.signUpButton}>
             <Link href="signIn">
               <Button>Sign Up</Button>
             </Link>
           </Grid>
-          <Grid item direction={"row"} className={classes.registerPageButton}>
+          <Grid item direction={"column"} className={classes.registerPageButton}>
             <Link href="/login">
               <Button>Log In!</Button>
             </Link>
           </Grid>
-          <Grid item direction={"row"}>
+          <Grid item direction={"column"}>
             <Link href="/">
-              <Button className={classes.goBackButton}>Go Home!</Button>
+              <Button className={classes.goBackButton}>Home</Button>
             </Link>
           </Grid>
         </Grid>

@@ -5,6 +5,8 @@ import {
   Link as MuiLink,
   Menu,
   MenuItem,
+  Grid,
+  Typography
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import Logout from "@/components/Logout";
@@ -12,12 +14,48 @@ import { useAuth } from "@/contexts/auth";
 import { useRouter } from "next/router";
 import withAuth from "@/hocs/withAuth";
 import Link from "next/link";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  feelingsLink: {
+    backgroundColor: "#40F113",
+    color: "black",
+    padding: "5px",
+    borderRadius: "20px",
+    marginRight: "10px"
+  },
+  playlistsLink: {
+    backgroundColor: "white",
+    color: "black",
+    padding: "5px",
+    borderRadius: "20px",
+    marginRight: "10px"
+  },
+  homeLink: {
+    backgroundColor: "#2A2A2A",
+    color: "white",
+    padding: "5px",
+    borderRadius: "20px"
+  },
+  vDivider: {
+    backgroundColor: "white"
+  },
+  message: {
+    color: "white",
+    marginRight: "10px",
+    paddingTop: "5px"
+  },
+  userIcon: {
+    padding: "0px"
+  }
+}));
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { user } = useAuth();
   const router = useRouter();
+  const classes = useStyles();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -35,59 +73,52 @@ const ProfileMenu = () => {
 
   return (
     <div>
-      {/*<div>*/}
-      {/*  <Box*/}
-      {/*    sx={{*/}
-      {/*      display: "flex",*/}
-      {/*      alignItems: "center",*/}
-      {/*      width: "fit-content",*/}
-      {/*      border: (theme) => `1px solid ${theme.palette.divider}`,*/}
-      {/*      borderRadius: 1,*/}
-      {/*      bgcolor: "background.paper",*/}
-      {/*      color: "text.secondary",*/}
-      {/*      "& svg": {*/}
-      {/*        m: 1.5,*/}
-      {/*      },*/}
-      {/*      "& hr": {*/}
-      {/*        mx: 0.5,*/}
-      {/*      },*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    <Link href="/" passHref>*/}
-      {/*      <MuiLink>Home</MuiLink>*/}
-      {/*    </Link>*/}
-      {/*    <Divider orientation="vertical" flexItem />*/}
-      {/*    <Link href="/songs/feelings" passHref>*/}
-      {/*      <MuiLink>How are you feeling today?</MuiLink>*/}
-      {/*    </Link>*/}
-      {/*    <Divider orientation="vertical" flexItem />*/}
-      {/*    <Link href="/playlists" passHref>*/}
-      {/*      <MuiLink>My playlists</MuiLink>*/}
-      {/*    </Link>*/}
-      {/*  </Box>*/}
-      {/*</div>*/}
-      <Link href="/" passHref>
-        <MuiLink>Home</MuiLink>
-      </Link>
-      <Divider orientation="vertical" textAlign="center" flexItem />
-      <Link href="/songs/feelings" passHref>
-        <MuiLink>How are you feeling today?</MuiLink>
-      </Link>
-      <Divider orientation="vertical" textAlign="center" flexItem />
-      <Link href="/playlists" passHref>
-        <MuiLink>My playlists</MuiLink>
-      </Link>
-
-      <IconButton
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
-        <AccountCircle /> {user.username}
-      </IconButton>
-
+      <Grid container className={classes.mainContainer}>
+        <Link href="/songs/feelings" passHref>
+          <MuiLink>
+            <Grid item direction={"column"} className={classes.feelingsLink}> 
+              <Typography variant="subtitle2">
+                  How are you feeling today?
+              </Typography>
+            </Grid>
+          </MuiLink>
+        </Link>
+        <Link href="/playlists" passHref>
+          <MuiLink>
+            <Grid item direction={"column"} className={classes.playlistsLink}> 
+              <Typography variant="subtitle2">
+                  My playlists
+              </Typography>
+            </Grid>
+          </MuiLink>
+        </Link>
+        <Link href="/" passHref>
+          <MuiLink>
+            <Grid item direction={"column"} className={classes.homeLink}> 
+              <Typography variant="subtitle2">
+                  Home
+              </Typography>
+            </Grid>
+          </MuiLink>
+        </Link>
+        <Divider orientation="vertical" variant="middle" className={classes.vDivider} flexItem />
+        <Grid item direction={"column"} className={classes.message}> 
+          <Typography variant="subtitle2">
+            Welcome,
+          </Typography>
+        </Grid>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleMenu}
+          color="inherit"
+          className={classes.userIcon}
+        >
+          <AccountCircle /> {user.username}
+        </IconButton>  
+      </Grid>
+      
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}

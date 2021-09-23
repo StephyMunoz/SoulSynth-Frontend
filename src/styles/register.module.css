@@ -45,12 +45,24 @@
     font-size: xxx-large;
 }
 
+.RegisterPage h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(112, 145, 21);
+
+    
+}
+.RegisterPage h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: xx-large;
+    color: aqua;
+}
 .RegisterPageDivider{
     background-color: #ffffff;
     height: 300px;
     width: 1px;
     
 }
+
 .RegisterPageH1{
     color: #ffffff;
 }
