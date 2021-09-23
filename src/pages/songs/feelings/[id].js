@@ -23,7 +23,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Playlist from "@/api/playlist";
 import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import $ from "jquery";
@@ -125,7 +124,6 @@ const SongsWithFeelingPage = () => {
   const handleClose = () => setOpen(false);
   const handleClose2 = () => setOpen2(false);
   const handleClose3 = () => setOpen2(false);
-  const [result, setResult] = useState("");
   const [errorsList, setErrorsList] = useState([]);
   const [idSong, setIdSong] = useState(0);
   const classes = useStyles();
@@ -157,7 +155,6 @@ const SongsWithFeelingPage = () => {
 
       const response = await Playlist.create(formData);
 
-      setResult("Playlist successfully added");
       reset();
       console.log("response", response);
       handleClose();
@@ -172,7 +169,6 @@ const SongsWithFeelingPage = () => {
     } catch (e) {
       console.log("e", e.response);
       const { response } = e;
-      setResult("An error has occurred");
 
       if (response) {
         if (response.data.errors) {
