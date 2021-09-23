@@ -25,9 +25,6 @@ import styledC from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import SpotifyPlayer from "react-spotify-player";
 import Alert from "@mui/material/Alert";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import Snackbar from "@material-ui/core/Snackbar";
 
 const size = {
