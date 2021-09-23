@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     textAlign: "center"
   },
   registerPageButton: {
-    margin: "0px 15px",
+    marginRight: "15px",
     backgroundColor: "#40F113",
     color: "black",
     borderRadius: "25px",
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: "25px",
     textAlign: "center",
     borderColor: "#ffffff",
-    margin: "0px 15px"
+    marginRight: "15px"
   },
   signUpButton: {
     backgroundColor: "#ffffff",
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: "20px",
     textAlign: "center",
     borderColor: "#2A2A2A",
-    margin: "0px 15px"
+    marginRight: "15px"
   },
 }));
 
