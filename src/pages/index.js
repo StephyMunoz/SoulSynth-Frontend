@@ -8,13 +8,15 @@ import headphones from "@/images/headphones.jpeg";
 
 const useStyles = makeStyles(() => ({
   background: {
-    backgroundColor: "#2A2A2A",
+    backgroundColor: "#2A2A2A"
   },
   gridForTwo: {
     display: "flex",
+    margin: "0 auto",
     justifyContent: "center",
     paddingTop: "50px",
     paddingBottom: "50px",
+    width: "1200px"
   },
   headphonesImage: {
     borderRadius: "500px",
