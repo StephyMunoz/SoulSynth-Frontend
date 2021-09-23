@@ -40,7 +40,6 @@ const size = {
   width: "100%",
   height: 300,
 };
-const view = "list"; // or 'coverart'
 
 const style = {
   position: "absolute",
