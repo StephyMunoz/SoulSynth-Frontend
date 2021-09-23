@@ -18,9 +18,11 @@ import Modal from "@material-ui/core/Modal";
 import Box from "@material-ui/core/Box";
 import Link from "next/link";
 
+
 const fetcher = (url) => api.get(url).then((res) => res.data);
 
 const useStyles = makeStyles(() => ({
+  
   mainDiv: {
     backgroundColor: "#2A2A2A",
     display: "block",
@@ -48,6 +50,7 @@ const useStyles = makeStyles(() => ({
     paddingLeft: "30px"
   },
   RomanticContainer: {
+    
     backgroundColor: "#bd4772",
     width: "500px",
     height: "100px",
@@ -92,10 +95,36 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     paddingLeft: "30px"
   },
-  feeling: {
+  feeling1: {
+    fontFamily:'Ribeye Marrow',
     fontWeight: "bold",
     paddingTop: "20px"
-  }
+  },
+  feeling2: {
+    fontFamily:'Rochester',
+    fontWeight: "bold",
+    paddingTop: "20px"
+  },
+  feeling3: {
+    fontFamily:'Schoolbell',
+    fontWeight: "bold",
+    paddingTop: "20px"
+  },
+  feeling4: {
+    fontFamily:'Risque',
+    fontWeight: "bold",
+    paddingTop: "20px"
+  },
+  feeling5: {
+    fontFamily:'Pirata One',
+    fontWeight: "bold",
+    paddingTop: "20px"
+  },
+  feeling6: {
+    fontFamily:'Gorditas',
+    fontWeight: "bold",
+    paddingTop: "20px"
+  },
 
 }));
 
@@ -105,7 +134,9 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  bgcolor: "rgba(66, 27, 178, 0.67)",
+  color:"#fff",
+  textAlign:'center',
   border: "2px solid #000",
   boxShadow: 24,
   pt: 2,
@@ -159,7 +190,7 @@ const FeelingsChoicePage = () => {
           <MuiLink onClick={() => getPlaylists(1)}>
             <Grid container className={classes.HappyContainer}>
               <Grid item direction={"column"}>
-                <Typography variant="h3" className={classes.feeling}>
+                <Typography variant="h3" className={classes.feeling1}>
                   Happy
                 </Typography>
               </Grid>
@@ -173,7 +204,7 @@ const FeelingsChoicePage = () => {
           <MuiLink onClick={() => getPlaylists(2)}>
             <Grid container className={classes.RomanticContainer}>
               <Grid item direction={"column"}>
-                <Typography variant="h3" className={classes.feeling}>
+                <Typography variant="h3" className={classes.feeling2}>
                   Romantic
                 </Typography>
               </Grid>
@@ -190,7 +221,7 @@ const FeelingsChoicePage = () => {
           <MuiLink onClick={() => getPlaylists(3)}>
             <Grid container className={classes.SadContainer}>
               <Grid item direction={"column"}>
-                <Typography variant="h3" className={classes.feeling}>
+                <Typography variant="h3" className={classes.feeling3}>
                   Sad
                 </Typography>
               </Grid>
@@ -204,7 +235,7 @@ const FeelingsChoicePage = () => {
           <MuiLink onClick={() => getPlaylists(4)}>
             <Grid container className={classes.AngryContainer}>
               <Grid item direction={"column"}>
-                <Typography variant="h3" className={classes.feeling}>
+                <Typography variant="h3" className={classes.feeling4}>
                   Angry
                 </Typography>
               </Grid>
@@ -221,7 +252,7 @@ const FeelingsChoicePage = () => {
           <MuiLink onClick={() => getPlaylists(5)}>
             <Grid container className={classes.PanickedContainer}>
               <Grid item direction={"column"}>
-                <Typography variant="h3" className={classes.feeling}>
+                <Typography variant="h3" className={classes.feeling5}>
                   Panicked
                 </Typography>
               </Grid>
@@ -235,7 +266,7 @@ const FeelingsChoicePage = () => {
           <MuiLink onClick={() => getPlaylists(6)}>
             <Grid container className={classes.CuriousContainer}>
               <Grid item direction={"column"}>
-                <Typography variant="h3" className={classes.feeling}>
+                <Typography variant="h3" className={classes.feeling6}>
                   Curious
                 </Typography>
               </Grid>
@@ -256,7 +287,7 @@ const FeelingsChoicePage = () => {
         >
           <Box sx={{ ...style, width: 500 }}>
             <h1>What do you prefer?</h1>
-            <h4>Listen your playlist</h4>
+            <h2>Listen your playlist</h2>
             {data.map(
               (playlist) =>
                 playlist.feeling === feeling && (
@@ -267,9 +298,13 @@ const FeelingsChoicePage = () => {
                   </div>
                 )
             )}
-            <Button onClick={handleRedirect}>Discover new music</Button>
-            Or
-            <Button onClick={handleClose}>Cancel</Button>
+            <div className={styles.modalbutton}>
+
+            <Button className={styles.modalbutton1} onClick={handleRedirect}>Discover new music</Button>
+            
+            <Button className={styles.modalbutton2} onClick={handleClose}>Cancel</Button>
+            </div>
+            
           </Box>
         </Modal>
       </div>

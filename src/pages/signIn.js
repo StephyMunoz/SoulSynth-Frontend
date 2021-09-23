@@ -26,8 +26,6 @@ const SignIn = () => {
   const [session] = useSession();
   const classes = useStyles();
 
-  // console.log("var", process.env.SPOTIFY_REDIRECT_URI);
-
   return (
     <div className={styles.RegisterPage}>
       {/*<SoulSynthNav />*/}
@@ -95,7 +93,9 @@ const SignIn = () => {
                 align="middle"
                 className={classes.registerPageButton}
               >
-                <Button>
+                <Button
+                  onClick={() => signIn("https://www.spotify.com/ec/signup/")}
+                >
                   Create Spotify Account...
                   <Image
                     //id="landing_logo"
