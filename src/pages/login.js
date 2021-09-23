@@ -1,10 +1,11 @@
-import { Button, Link as MuiLink, TextField } from "@material-ui/core";
+import { Button, Link as MuiLink, TextField, Typography } from "@material-ui/core";
 import Link from "next/link";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useAuth } from "@/contexts/auth";
+import { makeStyles } from "@material-ui/core/styles";
 import withoutAuth from "../hocs/withoutAuth";
 import Routes from "../constants/Routes";
 import { useRouter } from "next/router";
@@ -16,6 +17,16 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const schema = yup.object().shape({
   email: yup.string().email().required(),
 });
+
+const useStyles = makeStyles(() => ({
+  logInButton: {
+    backgroundColor: "#40F113",
+    margin: "20px 0px"
+  },
+  greenText: {
+    color: "#40F113"
+  }
+}));
 
 const LoginPage = () => {
   const [session] = useSession();
@@ -31,6 +42,7 @@ const LoginPage = () => {
   const [errorsList, setErrorsList] = useState([]);
   const { login } = useAuth();
   const router = useRouter();
+  const classes = useStyles();
 
   const onFinishLog = async (formData) => {
     try {
@@ -64,7 +76,7 @@ const LoginPage = () => {
   return (
     <div className={styles.RegisterPage}>
       <Title>If you already have an account here, just Log in!</Title>
-      <form onSubmit={handleSubmit(onFinishLog)} className={styles.Form}>
+      <form onSubmit={handleSubmit(onFinishLog)}>
         {session ? (
           <div>
             <Controller
@@ -81,7 +93,9 @@ const LoginPage = () => {
                     variant="standard"
                     size="small"
                   />
+                  
                   <AccountCircleIcon />
+                  
                 </div>
               )}
             />
@@ -110,7 +124,7 @@ const LoginPage = () => {
             <p>{errors.email?.message}</p>
           </div>
         )}
-        <Button type="submit" color="primary" variant="contained">
+        <Button type="submit" variant="contained" className={classes.logInButton}>
           Log In
         </Button>
         <p>{result}</p>
@@ -124,10 +138,12 @@ const LoginPage = () => {
       </form>{" "}
       <div>
         <p>
-          Don´t have an account yet? {"   "}
-          <Link href="/register" passHref>
-            <MuiLink>Register</MuiLink>
-          </Link>
+          <Typography variant="h6">
+            Don´t have an account yet? {"   "}
+            <Link href="/register" passHref>
+              <MuiLink className={classes.greenText}>Register</MuiLink>
+            </Link>
+          </Typography>
         </p>
       </div>
     </div>
