@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import TableContainer from "@material-ui/core/TableContainer";
 import styles from "@/styles/songs.module.css";
+import styles1 from "@/styles/register.module.css";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -37,6 +38,7 @@ const schema = yup.object().shape({
 });
 
 const size = {
+  margin: "auto",
   width: "100%",
   height: 300,
 };
@@ -47,7 +49,9 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "#e5acac",
+  bgcolor: "rgba(30, 232, 74, 0.76)",
+  textAlign: 'center',
+  fontSize: 'large',
   border: "2px solid #000",
   boxShadow: 24,
   pt: 2,
@@ -58,11 +62,12 @@ const style = {
 };
 const styleNew = {
   position: "absolute",
+  textAlign: 'center',
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "#4abcc1",
+  bgcolor: "rgb(39 232 240 / 63%)",
   border: "2px solid #000",
   boxShadow: 24,
   pt: 2,
@@ -71,7 +76,6 @@ const styleNew = {
   color: "#ffffff",
   alignItems: "center",
   justifyContent: "center",
-  opacity: 0.7,
 };
 const useStyles = makeStyles(() => ({
   modalButton: {
@@ -208,7 +212,7 @@ const SongsWithFeelingPage = () => {
             <AddCircleOutlineIcon />
           </StyledButton>
         </Grid>
-        <Grid item xs={12} alignContent="center">
+        <Grid item xs={12} >
           {selectSong && (
             <SpotifyPlayer
               uri={selectSong.link}
@@ -301,9 +305,10 @@ const SongsWithFeelingPage = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-
-            <Button onClick={handleOpen}>Add a new playlist</Button>
-            <Button onClick={handleClose2}>Cancel</Button>
+            <div className={styles1.modalbutton}>
+            <Button className={styles1.modalbutton1} onClick={handleOpen}>Add a new playlist</Button>
+            <Button className={styles1.modalbutton2} onClick={handleClose2}>Cancel</Button>
+            </div>
           </StyledBox>
         </Modal>
       </div>
